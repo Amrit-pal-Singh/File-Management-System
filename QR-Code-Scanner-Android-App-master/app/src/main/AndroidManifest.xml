@@ -17,21 +17,29 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ScannerBarcodeActivity"
-                android:label="@string/scan_barcode"
-            />
-        <activity android:name=".PictureBarcodeActivity"
-            android:label="@string/take_barcode_picture"
-            />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            >
+        <activity android:name=".SignupActivity"
+            android:label="Signup Page"></activity>
+        <activity android:name=".LoginActivity"
+            android:label="Login Page"
+            android:theme="@style/AppTheme.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ScannerBarcodeActivity"
+            android:label="@string/scan_barcode" />
+        <activity
+            android:name=".PictureBarcodeActivity"
+            android:label="@string/take_barcode_picture" />
+        <activity
+            android:name=".GenerateBarcodeActivity"
+            android:label="Generate Barcode" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
         </activity>
 
         <provider
