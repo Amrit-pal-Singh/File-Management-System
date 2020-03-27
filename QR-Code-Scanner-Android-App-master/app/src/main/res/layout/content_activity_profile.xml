@@ -185,6 +185,22 @@ tools:showIn="@layout/activity_profile">
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#727272" />
 
+        <ToggleButton
+            android:id="@+id/chkState5"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@drawable/toggle_selector"
+            android:checked="true"
+            android:padding="6dp"
+            android:textOff=""
+            android:textOn=""
+            android:visibility="invisible"/>
+
     </RelativeLayout>
 
     <include layout="@layout/item_divider" />
