@@ -15,9 +15,15 @@
         android:layout_margin="10dp"
         >
         <Button
+            android:id="@+id/buttonGoToProfilePage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Profile" />
+        <Button
             android:id="@+id/buttonTakePicture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/take_barcode_picture" />
         <Button
             android:id="@+id/buttonScanBarcode"

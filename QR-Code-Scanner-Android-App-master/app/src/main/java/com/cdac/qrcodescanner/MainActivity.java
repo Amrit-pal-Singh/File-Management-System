@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.buttonTakePicture).setOnClickListener(this);
         findViewById(R.id.buttonScanBarcode).setOnClickListener(this);
         findViewById(R.id.buttonGoToBarcode).setOnClickListener(this);
+        findViewById(R.id.buttonGoToProfilePage).setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.buttonGoToBarcode:
                 startActivity(new Intent(this, GenerateBarcodeActivity.class));
+                break;
+            case R.id.buttonGoToProfilePage:
+                startActivity(new Intent(this, ProfileActivity.class));
+                break;
         }
     }
 }
