@@ -18,9 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SignupActivity"
-            android:label="Signup Page"></activity>
+            android:label="Signup Page"
+            android:theme="@style/AppTheme.Dark"></activity>
         <activity android:name=".LoginActivity"
-            android:label="Login Page"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
