@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.buttonScanBarcode).setOnClickListener(this);
         findViewById(R.id.buttonGoToBarcode).setOnClickListener(this);
         findViewById(R.id.buttonGoToProfilePage).setOnClickListener(this);
+        findViewById(R.id.buttonTrackFile).setOnClickListener(this);
     }
 
     @Override
@@ -55,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.buttonGoToProfilePage:
                 startActivity(new Intent(this, ProfileActivity.class));
+                break;
+            case R.id.buttonTrackFile:
+                startActivity(new Intent(this, TrackfileActivity.class));
                 break;
         }
     }
