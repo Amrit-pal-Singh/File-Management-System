@@ -2,15 +2,15 @@ from rest_framework import serializers
 from rest_framework.serializers import (
 	ModelSerializer,
 )
-from hierarchy.models import hierarchyModel, officeName
-from hierarchy.models import officeName
+from hierarchy.models import hierarchyModel, Office
+from hierarchy.models import Office
 
 
 class listSerializer(ModelSerializer):
 	class Meta:
 		model = hierarchyModel
 		fields = [
-			'officeName',
+			'Office',
 			'officeId',
 			'levels',
 		]
@@ -20,13 +20,13 @@ class addSerializer(ModelSerializer):
 	class Meta:
 		model = hierarchyModel
 		fields = [
-			'officeName',
+			'Office',
 			'officeId',
 			'levels',
 		]
 class addOfficeSerializer(ModelSerializer):
 	class Meta:
-		model = officeName
+		model = Office
 		fields = [
 			'id_category',
 			'name'
@@ -44,7 +44,7 @@ class showSerializer(ModelSerializer):
 
 class listofficeSerializer(ModelSerializer):
 	class Meta:
-		model = officeName
+		model = Office
 		fields = [
 			'id',
 			'id_category',

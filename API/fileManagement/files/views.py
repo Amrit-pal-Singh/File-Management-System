@@ -15,7 +15,7 @@ def add_files(request):
         'username' : str(name), 
         'status' : "Customer", 
         'path':"Customer",
-		'officeName': 'asfaasda',
+		'Office': 'asfaasda',
     } 
 	form = ListForm(request.POST)
 	# form = ListForm(request.POST, username=name)

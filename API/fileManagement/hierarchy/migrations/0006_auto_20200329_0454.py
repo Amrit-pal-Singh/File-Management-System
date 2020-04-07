@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='hierarchymodel',
-            name='officeName',
+            name='Office',
             field=models.CharField(default=0, max_length=400),
         ),
     ]

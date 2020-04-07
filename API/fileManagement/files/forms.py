@@ -11,4 +11,4 @@ class ListForm(forms.ModelForm):
 class UpdateForm(forms.ModelForm):
 	class Meta:
 		model = filesModel
-		exclude = ["qr", 'username', 'officeName']
+		exclude = ["qr", 'username', 'Office']

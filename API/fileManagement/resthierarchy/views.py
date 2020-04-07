@@ -15,7 +15,7 @@ from rest_framework.generics import (CreateAPIView, RetrieveUpdateAPIView, Destr
 from rest_framework.response import Response
 
 from hierarchy.models import hierarchyModel
-from hierarchy.models import officeName
+from hierarchy.models import Office
 
 
 from rest_framework.permissions import (
@@ -45,7 +45,7 @@ class AddOfficehierarchy(CreateAPIView):
 	# authentication_classes = (TokenAuthentication, SessionAuthentication)
 	# permission_classes = (IsAuthenticated,)
 	serializer_class = addOfficeSerializer
-	queryset = officeName.objects.all()
+	queryset = Office.objects.all()
 
 	def perform_create(self, serializer):
 		serializer.save()
@@ -58,7 +58,7 @@ class AddOfficehierarchy(CreateAPIView):
 
 class officeAllAPIView(ListAPIView):
 	serializer_class = listofficeSerializer
-	queryset = officeName.objects.all()
+	queryset = Office.objects.all()
 
 
 class officeIdAPIView(ListAPIView):

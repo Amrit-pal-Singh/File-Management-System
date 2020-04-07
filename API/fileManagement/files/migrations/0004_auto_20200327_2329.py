@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='filesmodel',
-            name='officeName',
+            name='Office',
             field=models.CharField(default='', max_length=400),
         ),
         migrations.AlterField(

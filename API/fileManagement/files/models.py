@@ -5,5 +5,5 @@ class filesModel(models.Model):
     username = models.CharField(max_length=400, default='', blank=True)
     status = models.CharField(max_length=400, default='', blank=True)
     path = models.CharField(max_length=1000, default='', blank=True)
-    officeName = models.CharField(max_length=400, default='')
+    Office = models.CharField(max_length=400, default='')
 

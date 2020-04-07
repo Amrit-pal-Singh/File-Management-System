@@ -11,7 +11,7 @@ class listUserSerializer(ModelSerializer):
 			'qr',
 			'status',
 			'path',
-			'officeName'
+			'Office'
 		]
 
 class listMyFilesSerializer(ModelSerializer):
@@ -21,7 +21,7 @@ class listMyFilesSerializer(ModelSerializer):
 			'qr',
 			'status',
 			'path',
-			'officeName'
+			'Office'
 		]
 
 class addSerializer(ModelSerializer):
@@ -29,7 +29,7 @@ class addSerializer(ModelSerializer):
 		model = filesModel
 		fields = [
 			'qr',
-			'officeName'
+			'Office'
 		]
 
 class deleteSerializer(ModelSerializer):

@@ -1,9 +1,9 @@
 from .models import filesModel
 from hierarchy.models import hierarchyModel
-from hierarchy.models import officeName
+from hierarchy.models import Office
 
 def set_status(name, status):
-    office = officeName.objects.filter(name=name)
+    office = Office.objects.filter(name=name)
     id = office.id_category
     levels = get_levels(id)
     setLevel = ''

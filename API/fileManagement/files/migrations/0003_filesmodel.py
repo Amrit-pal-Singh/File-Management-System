@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('username', models.CharField(default='0', max_length=400)),
                 ('status', models.CharField(default='0', max_length=400)),
                 ('path', models.CharField(default='0', max_length=1000)),
-                ('officeName', models.CharField(default='0', max_length=400)),
+                ('Office', models.CharField(default='0', max_length=400)),
             ],
         ),
     ]

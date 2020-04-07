@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RenameModel(
             old_name='Category',
-            new_name='officeName',
+            new_name='Office',
         ),
         migrations.DeleteModel(
             name='Post',
