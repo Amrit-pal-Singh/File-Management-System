@@ -20,13 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ahgj%i+&)=h-3)$d(*#$vnpriuzoo=6pn*wj!#uk*q=ejg_b1^'
+SECRET_KEY = '+mto#)04f!z_c8n94jdx6$1qu#zs)is+t_&pdv07c9^2-w&7*-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,15 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'restaccount',
+    'databaseManagement',
+    'restDatabaseManagement',
     'rest_framework',
-    'rest_framework.authtoken',
-    'hierarchy',
-    'userProfile',
-    'resthierarchy',
-    'files',
-    'restfiles',
-    'userAccount',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +122,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-AUTH_USER_MODEL = 'restaccount.DriverUser'
-LOGIN_REDIRECT_URL = '/files/list'

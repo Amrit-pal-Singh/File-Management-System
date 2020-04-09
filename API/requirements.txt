@@ -1,0 +1,7 @@
+pip3 install Django==3.0.4
+pip3 install djangorestframework
+pip3 install markdown
+pip3 install django-filter
+pip3 install django-phonenumber-field
+pip3 install phonenumbers
+
