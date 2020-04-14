@@ -1,7 +1,0 @@
-Django==3.0.4
-djangorestframework
-markdown
-django-filter
-django-phonenumber-field
-phonenumbers
-

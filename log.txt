@@ -1,0 +1,107 @@
+commit 137d0f955b530060ce28dc1c5923adc06bf63889
+Author: Jai Garg <jaigarg1499@gmail.com>
+Date:   Fri Apr 10 07:47:11 2020 +0530
+
+    updated requirements
+
+commit af7dcc5ecb0edf0d784fd29e7a7e301d1e2170f6
+Author: Amritpal Singh <2017csb1068@iitrpr.ac.in>
+Date:   Thu Apr 9 17:57:56 2020 +0530
+
+    new implementation of database and api
+
+commit 53cb4d0ce3a936ec2504652d0ad652407b74c385
+Author: Abhishek Yadav <abhi.cs.0217@gmail.com>
+Date:   Wed Apr 8 15:40:05 2020 +0530
+
+    refactoring 2
+
+commit 692ec9d7bb950c1fc85bcf199d1ead667a11de6f
+Author: Abhishek Yadav <abhi.cs.0217@gmail.com>
+Date:   Tue Apr 7 20:39:09 2020 +0530
+
+    api code refactored
+
+commit 605d9891bbdbe68006701a25576e3472c2010d17
+Author: Abhishek Yadav <abhi.cs.0217@gmail.com>
+Date:   Tue Apr 7 15:27:55 2020 +0530
+
+    requirements.txt file added
+
+commit 1f30265fcc2d778b902e72c9b0b90b35afc6eb46
+Author: Amritpal Singh <2017csb1068@iitrpr.ac.in>
+Date:   Tue Apr 7 14:43:25 2020 +0530
+
+    removing unnecessary files
+
+commit fe99b47a6931810c345dfbfd7e806d4bddcd7349
+Author: Amritpal Singh <2017csb1068@iitrpr.ac.in>
+Date:   Tue Apr 7 14:37:41 2020 +0530
+
+    removing unnecessary files
+
+commit 4aba1597abe11d0422b8f9f73b52af8be552df9c
+Author: Abhishek Yadav <abhi.cs.0217@gmail.com>
+Date:   Mon Apr 6 20:30:10 2020 +0530
+
+    Readme updated
+
+commit d66c23de13962f9e846697d49d882a014212749a
+Author: Amritpal Singh <2017csb1068@iitrpr.ac.in>
+Date:   Tue Mar 31 12:37:02 2020 +0530
+
+    API added
+
+commit 0f82aa8de74dab30f3736214c81da435136a071e
+Author: code-bandit <ripudamansingh1807@gmail.com>
+Date:   Sat Mar 28 17:44:48 2020 +0530
+
+    trackfile activity added
+
+commit 382fd9e3ff001e079ad29bdd6e16317abbb41375
+Author: code-bandit <ripudamansingh1807@gmail.com>
+Date:   Sat Mar 28 17:05:47 2020 +0530
+
+    Edit Profile Feature added
+
+commit f8bd135e9cd876afadb0bd5f7c842328e4a3883a
+Author: code-bandit <ripudamansingh1807@gmail.com>
+Date:   Fri Mar 27 19:10:57 2020 +0530
+
+    content_activity_profile error corrected.
+
+commit a76c420847bc896ee09ce4a961dc7d27954406ea
+Author: code-bandit <ripudamansingh1807@gmail.com>
+Date:   Fri Mar 27 19:09:35 2020 +0530
+
+    Profile Page Added
+
+commit c4263c33eecfa1ea60249ce64e83d66408f3c428
+Author: code-bandit <ripudamansingh1807@gmail.com>
+Date:   Fri Mar 27 17:56:15 2020 +0530
+
+    signup page added and color scheme changed for login and signup
+
+commit 97254e176e2c5cdd485e25c56adceba8ce90c27c
+Author: code-bandit <ripudamansingh1807@gmail.com>
+Date:   Tue Mar 24 12:13:35 2020 +0530
+
+    login page added
+
+commit 066eee0e122899e6ad4684c9b0e70890bf017900
+Author: code-bandit <ripudamansingh1807@gmail.com>
+Date:   Tue Mar 24 12:13:04 2020 +0530
+
+    login page added
+
+commit b8e5a80a3b4e6340847376c71bbd522139107944
+Author: code-bandit <ripudamansingh1807@gmail.com>
+Date:   Thu Feb 20 16:40:32 2020 +0530
+
+    We can generate barcoded by giving input ourselves
+
+commit 9958841c8231ea630c2b6589338f6ef0b193d3aa
+Author: Amritpal Singh <2017csb1068@iitrpr.ac.in>
+Date:   Tue Feb 18 21:02:08 2020 +0530
+
+    QR code scanning complete
