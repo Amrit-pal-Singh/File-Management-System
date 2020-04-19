@@ -22,7 +22,8 @@ print("""
 # data = {"username": "2017csb1110@iitrpr.ac.in", "password": "new_pass_123"}
 
 url_login = 'http://127.0.0.1:8000/api/v1/db/login/'
-data = {"username": "amritpal@gmail.com", "password": "new_pass_123"}
+data = {"username": "jai69@gmail.com","password": "new_pass_123"}
+# data = {"username": "amritpal@gmail.com", "password": "new_pass_123"}
 # print(data)
 r = requests.post(url_login, json=data)
 pprint(r.json())
@@ -36,12 +37,12 @@ headers = {'Authorization': f'Token {token}'}
 
 print("""       
 
-      **  Getting User Info  **      
+      **  Add new user  **      
         
 """)
-url_user_info = 'http://127.0.0.1:8000/api/v1/db/get_user_info/'
-data = {"email": "amritpal@gmail.com", "password": "new_pass_123"}
-r = requests.get(url_user_info,data=data, headers=headers)
+url_add_user = 'http://127.0.0.1:8000/api/v1/db/add_user/'
+data = {"first_name": "Jai", "last_name": "Garg", "email": "jai69@gmail.com" ,"password": "new_pass_123"}
+r = requests.post(url_add_user,data=data, headers=headers)
 print(r.status_code)
 pprint(r.json())
 
@@ -52,7 +53,7 @@ print("""
       **  LISTING ALL Users **
         
 """)
-url_list_student = 'http://127.0.0.1:8000/api/v1/db/list_students/'
-r = requests.get(url_list_student, headers=headers)
+url_list_users = 'http://127.0.0.1:8000/api/v1/db/list_users/'
+r = requests.get(url_list_users, headers=headers)
 pprint(r.json())
 

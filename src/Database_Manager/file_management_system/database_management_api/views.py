@@ -43,14 +43,13 @@ class CustomAuthToken(ObtainAuthToken):
             roles_dict[index] ={'name': i.name, 'department': i.department} 
             index += 1
 
-        if(is_officer == False):
-            return Response({'token': token.key,
-                         'email': token.user.email,
-                         'admin_permissions': token.user.is_staff,
-                         'first_name': first_name,
-                         'last_name': last_name,
-                         'roles': roles_dict
-            })
+        return Response({'token': token.key,
+                        'email': token.user.email,
+                        'admin_permissions': token.user.is_staff,
+                        'first_name': first_name,
+                        'last_name': last_name,
+                        'roles': roles_dict
+        })
         
 
 class AddUser(mixins.CreateModelMixin,
@@ -69,19 +68,20 @@ class AddUser(mixins.CreateModelMixin,
         # password = self.serializer.validated_data['password']
         
         # username, email, password
-        user = User.objects.create_user(email, email, password)
-        user.first_name = self.serializer.validated_data['first_name']
-        user.last_name = self.serializer.validated_data['last_name']
-        user.email = email
-        user.save()
-        # except:
-        #     return Response({'Error': 'User With This Credentials Cannot be Stored'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user = User.objects.create_user(email, password)
+            user.first_name = self.serializer.validated_data['first_name']
+            user.last_name = self.serializer.validated_data['last_name']
+            user.email = email
+            user.save()
+        except:
+            return Response({'error': 'User cannot be created'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(self.serializer.validated_data, status=status.HTTP_201_CREATED)
 
 
 class ListUsers(APIView):
-    # authentication_classes = (TokenAuthentication, )
-    # permission_classes = (IsAdminUser, IsAuthenticated)
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAdminUser, IsAuthenticated)
     queryset = User.objects.all()
     def get(self, request, *args, **kwargs):
         objects = User.objects.all()
