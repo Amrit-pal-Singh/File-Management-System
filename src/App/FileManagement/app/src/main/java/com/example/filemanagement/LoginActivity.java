@@ -40,5 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void Login(View View) {
         Toast.makeText(getApplicationContext(), "Trying to Login", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, FrontPageActivity.class));
     }
 }

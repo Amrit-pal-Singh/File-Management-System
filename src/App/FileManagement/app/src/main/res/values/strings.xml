@@ -12,6 +12,23 @@
     <string name="don_t_have_any_account">Don\'t have any Account ?</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
+    <string name="title_activity_front_page">FrontPageActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">File Management App</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_batch_processing">Batch Processing</string>
+    <string name="menu_plan_to_send">Plan To Send</string>
+    <string name="menu_recieve">Recieve</string>
+    <string name="menu_approve_disapprove">Approve/Disapprove</string>
+    <string name="menu_about_developers"><b>About Developers</b></string>
+    <string name="menu_logout">LogOut</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
 
 
 </resources>
