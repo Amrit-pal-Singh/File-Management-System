@@ -1,19 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_home"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="vertical"
+        android:layout_weight="0">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/colorAccent">
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_account_circle_black_24dp"
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"
+                android:background="@drawable/profile_image_background"></ImageView>
+            <TextView
+                android:id="@+id/profileName"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="Ripudaman Singh"
+                android:textColor="@color/whiteTextColor"
+                android:layout_below="@+id/profileImage"
+                android:textAlignment="center"></TextView>
+            <TextView
+                android:id="@+id/hardCodedText_home"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="Current Role : Proff"
+                android:textColor="@color/whiteTextColor"
+                android:layout_below="@+id/profileName"
+                android:textAlignment="center"></TextView>
+        </RelativeLayout>
+        <Spinner
+            android:id="@+id/role_selector"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:prompt="@string/spinner_prompt_home"
+            android:spinnerMode="dropdown"></Spinner>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="bottom|center"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/viewFiles_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View My Files"></Button>
+
+    </LinearLayout>
+</LinearLayout>
