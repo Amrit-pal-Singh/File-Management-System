@@ -37,4 +37,6 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     //animated button for login
     implementation 'br.com.simplepass:loading-button-android:1.14.0'
+    //qr code scan
+    implementation 'com.google.android.gms:play-services-vision:11.8.0'
 }
