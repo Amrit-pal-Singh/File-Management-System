@@ -56,19 +56,6 @@ public class ApproveDisapproveFragment extends Fragment {
     private void initViews() {
         txtBarcodeValue = root.findViewById(R.id.txtBarcodeValue);
         surfaceView = root.findViewById(R.id.surfaceView);
-//        btnAction = root.findViewById(R.id.btnAction);
-//        btnAction.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (intentData.length() > 0) {
-//                    if (isEmail)
-//                        startActivity(new Intent(ScannedBarcodeActivity.this, EmailActivity.class).putExtra("email_address", intentData));
-//                    else {
-//                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
-//                    }
-//                }
-//            }
-//        });
     }
 
     private void initialiseDetectorsAndSources() {
