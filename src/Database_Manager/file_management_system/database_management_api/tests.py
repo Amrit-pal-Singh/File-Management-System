@@ -18,6 +18,8 @@ print("""
         
 """)
 
+'''
+
 # url_login = 'http://127.0.0.1:8000/api/v1/db/login/'
 # data = {"username": "2017csb1110@iitrpr.ac.in", "password": "new_pass_123"}
 
@@ -56,4 +58,25 @@ print("""
 url_list_users = 'http://127.0.0.1:8000/api/v1/db/list_users/'
 r = requests.get(url_list_users, headers=headers)
 pprint(r.json())
+
+'''
+
+path = ""
+
+def set_path(x):
+    path = x
+    print(json.dumps(x))
+
+
+def get_path():
+    print(json.loads(path))
+
+
+
+dictionary = {'1': 'amrit'}
+set_path(dictionary)
+get_path()
+
+
+
 

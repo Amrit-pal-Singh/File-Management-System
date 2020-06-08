@@ -27,6 +27,8 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from datetime import datetime
+
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -79,6 +81,37 @@ class AddUser(mixins.CreateModelMixin,
         return Response(self.serializer.validated_data, status=status.HTTP_201_CREATED)
 
 
+
+class CreateFile(mixins.CreateModelMixin,
+                viewsets.GenericViewSet):
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+    serializer_class = AddFileSerializer
+    queryset = File.objects.all()
+    def create(self, request, *args, **kwargs):
+        self.serializer = self.get_serializer(data=request.data)
+        self.serializer.is_valid(raise_exception=true)
+        qr = self.serializer.validated_data['qr']
+        name = self.serializer.validated_data['name']
+        user = request.user
+        time_generated = datetime.now()
+        restarted = False
+        path = File.set_path("")
+        approved = False
+
+
+        # how to add plan to send. 
+        # try to add blank=true in model check if it is allowed
+        file = File.objects.create(qr=qr,name=name,user=user,time_generated=time_generated,restarted=restarted,path=path,approved=approved)
+        
+        # i dont think this is required but still try it.
+        file.save();
+        return Response(self.serializer.validated_data, status=status.HTTP_201_CREATED)        
+
+
+
+
+
 class ListUsers(APIView):
     authentication_classes = (TokenAuthentication, )
     permission_classes = (IsAdminUser, IsAuthenticated)
@@ -102,4 +135,47 @@ class ListUsers(APIView):
         jsonUser = json.loads(dictUsersDump)
         return Response(jsonUser, status=status.HTTP_200_OK)
         # return JsonResponse(dictUsers)
+
+class AllRolesOfUser(APIView):
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+    def get(self, request, *args, **kwargs):
+        user_logined = request.user
+        roles = user_logined.roles.all()
+        dict_roles = {}
+        index = 1
+        for role in roles:
+            dict_roles[role.name] = role.department       
+        print(dict_roles)
+        dictRolesDump = json.dumps(dict_roles)
+        jsonUser = json.loads(dictRolesDump)
+        return Response(jsonUser, status=status.HTTP_200_OK)
+
+
+class ViewMyGeneratedFiles(APIView):
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+    def get(self, request, *args, **kwargs):            
+        user_logined = request.user
+        files = Files.objects.filter(user=user_logined)        
+        dict_files = {}
+        index = 1
+        for file in files:
+            dict_files[index] = {'qr': file.qr,
+                                'name':file.name,
+                                'time_generated':file.time_generated,
+                                'restarted':file.restarted,
+                                'path':file.get_path(),
+                                'plan_to_send':file.plan_to_send,
+                                'approved':file.approved}    
+            index += 1
+        dictFilesDump = json.dumps(dict_files)
+        jsonFiles = json.loads(dictFilesDump)
+        return Response(jsonFiles, status=status.HTTP_200_OK)
+
+
+class ViewMyApprovedDisapprovedFiles():
     
+
+
+

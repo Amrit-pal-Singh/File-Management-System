@@ -159,3 +159,9 @@ class File(models.Model):
     def get_approved(self):
         return json.loads(self.approved)
 
+    def add_approved():
+        pass
+
+    def add_path():
+        pass
+    
