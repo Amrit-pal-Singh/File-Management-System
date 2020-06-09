@@ -17,9 +17,9 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_plan_to_send" />
         <item
-            android:id="@+id/nav_recieve"
+            android:id="@+id/nav_receive"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_recieve" />
+            android:title="@string/menu_receive" />
         <item
             android:id="@+id/nav_approve_disapprove"
             android:icon="@drawable/ic_menu_gallery"
