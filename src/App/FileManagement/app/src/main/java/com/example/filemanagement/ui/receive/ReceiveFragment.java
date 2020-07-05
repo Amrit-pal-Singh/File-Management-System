@@ -1,4 +1,4 @@
-package com.example.filemanagement.ui.recieve;
+package com.example.filemanagement.ui.receive;
 
 import android.Manifest;
 import android.content.Intent;
@@ -34,7 +34,7 @@ import java.io.IOException;
 
 public class ReceiveFragment extends Fragment {
 
-    private RecieveViewModel recieveViewModel;
+    private ReceiveViewModel receiveViewModel;
 
     SurfaceView surfaceView;
     TextView txtBarcodeValue;
@@ -46,9 +46,9 @@ public class ReceiveFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        recieveViewModel =
-                ViewModelProviders.of(this).get(RecieveViewModel.class);
-        root = inflater.inflate(R.layout.fragment_recieve, container, false);
+        receiveViewModel =
+                ViewModelProviders.of(this).get(ReceiveViewModel.class);
+        root = inflater.inflate(R.layout.fragment_receive, container, false);
 
         initViews();
 

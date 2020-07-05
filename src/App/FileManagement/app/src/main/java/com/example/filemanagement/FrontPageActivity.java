@@ -48,7 +48,7 @@ public class FrontPageActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_batch_processing, R.id.nav_plan_to_send,
-                R.id.nav_recieve, R.id.nav_approve_disapprove, R.id.nav_about_developers,
+                R.id.nav_receive, R.id.nav_approve_disapprove, R.id.nav_about_developers,
                 R.id.nav_logout, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();

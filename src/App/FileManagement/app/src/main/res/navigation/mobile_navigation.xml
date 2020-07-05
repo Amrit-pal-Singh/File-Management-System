@@ -24,10 +24,10 @@
         tools:layout="@layout/fragment_plan_to_send" />
 
     <fragment
-        android:id="@+id/nav_recieve"
-        android:name="com.example.filemanagement.ui.recieve.ReceiveFragment"
+        android:id="@+id/nav_receive"
+        android:name="com.example.filemanagement.ui.receive.ReceiveFragment"
         android:label="@string/menu_receive"
-        tools:layout="@layout/fragment_recieve" />
+        tools:layout="@layout/fragment_receive" />
 
     <fragment
         android:id="@+id/nav_approve_disapprove"

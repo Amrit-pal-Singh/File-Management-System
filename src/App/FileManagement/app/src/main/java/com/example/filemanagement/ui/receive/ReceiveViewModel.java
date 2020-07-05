@@ -1,16 +1,16 @@
-package com.example.filemanagement.ui.recieve;
+package com.example.filemanagement.ui.receive;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class RecieveViewModel extends ViewModel {
+public class ReceiveViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public RecieveViewModel() {
+    public ReceiveViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is Recieve fragment");
+        mText.setValue("This is Receive fragment");
     }
 
     public LiveData<String> getText() {
