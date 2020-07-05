@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
+import json
 
 
 class Role(models.Model):
@@ -86,11 +87,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     '''
 
     username_validator = UnicodeUsernameValidator()
-
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     email = models.EmailField(unique=True)
-    roles = models.ManyToManyField(Role, blank=True)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -104,8 +103,8 @@ class User(AbstractBaseUser, PermissionsMixin):
             'Unselect this instead of deleting accounts.'
         ),
     )
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     objects = UserManager()
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -130,24 +129,36 @@ class User(AbstractBaseUser, PermissionsMixin):
     #     send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
+class AppUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    roles = models.ManyToManyField(Role, blank=True)
+    
+    def __str__(self):
+        return str(self.user.first_name) + " " + str(self.user.last_name)
+
 class File(models.Model):
     '''
     For every file this model will be used.
     '''
     qr = models.CharField(max_length=1000, unique=True)
     name = models.CharField(max_length=500)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     time_generated = models.DateTimeField(auto_now_add=True)
-    restrarted = models.BooleanField()
-    path = models.CharField(max_length=1000)
-    plan_to_send = models.ForeignKey(Role, on_delete=models.CASCADE)
+    restarted = models.BooleanField()
+    path = models.CharField(max_length=1000, null=True)
+    plan_to_send = models.ForeignKey(Role, on_delete=models.CASCADE,null=True)
     approved = models.CharField(max_length=1000)
+
+    def save(self, *args, **kwargs):
+        print(self.path)
+        self.path += '+'
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.qr)
 
     def set_path(self, x):
-        self.path = json.dumps(x)
+        return json.dumps(x)
 
     def get_path(self):
         return json.loads(self.path)

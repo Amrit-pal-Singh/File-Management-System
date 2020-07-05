@@ -26,8 +26,7 @@ class AddRoleSerializer(ModelSerializer):
 
 
 class AddFileSerializer(ModelSerializer):
-    email = serializers.EmailField(write_only=True)
     class Meta:
         model = File
-        fields = ('qr', 'name', 'email')
+        fields = ('qr', 'name',)
 
