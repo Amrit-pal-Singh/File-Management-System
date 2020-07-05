@@ -21,10 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
 
 public class FrontPageActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    Button b1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

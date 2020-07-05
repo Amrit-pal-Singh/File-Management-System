@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.filemanagement.ActivityViewFile;
 import com.example.filemanagement.R;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -92,8 +93,7 @@ public class HomeFragment extends Fragment {
         viewFiles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//              startActivity(new Intent(getContext(), Demo.class));
-                Toast.makeText(getContext(), "Complete Intent", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getContext(), ActivityViewFile.class));
 
             }
         });
