@@ -1,3 +1,15 @@
+commit a056d7a9eef96bd5f78f198e9e6c518a72cf7a9b
+Author: code-bandit <ripudamansingh1807@gmail.com>
+Date:   Sun Jul 5 15:22:17 2020 +0530
+
+    intent to open new page from plan to send batch processing
+
+commit 04a544257c40a76a3da7a6df73643d3c61499ff7
+Author: Jai Garg <jaigarg1499@gmail.com>
+Date:   Sun Jul 5 15:05:49 2020 +0530
+
+    View Files Activity
+
 commit 137d0f955b530060ce28dc1c5923adc06bf63889
 Author: Jai Garg <jaigarg1499@gmail.com>
 Date:   Fri Apr 10 07:47:11 2020 +0530
