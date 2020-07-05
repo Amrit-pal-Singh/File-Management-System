@@ -19,6 +19,11 @@
             android:layout_marginHorizontal="80dp"
             android:hint="Search files.."
             android:inputType="textVisiblePassword"/>
+        <ListView
+            android:id = "@+id/myFilesList"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_margin="16dp"/>
 
         <Button
             android:layout_width="match_parent"
