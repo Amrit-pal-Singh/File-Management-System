@@ -30,7 +30,7 @@ public class BatchProcessingFragment extends Fragment {
 //        });
 
         //-------------------------------------jai aahh part dekhli---------------------------------------------------
-        plant_to_send_btn = root.findViewById(R.id.plan_to_send_btn_bp);
+        plant_to_send_btn = root.findViewById(R.id.plan_to_send_bp);
         plant_to_send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
