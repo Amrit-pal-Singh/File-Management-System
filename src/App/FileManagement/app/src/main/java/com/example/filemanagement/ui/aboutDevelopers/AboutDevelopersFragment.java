@@ -23,13 +23,7 @@ public class AboutDevelopersFragment extends Fragment {
         aboutDevelopersModel =
                 ViewModelProviders.of(this).get(AboutDevelopersModel.class);
         View root = inflater.inflate(R.layout.fragment_about_developers, container, false);
-        final TextView textView = root.findViewById(R.id.text_about_developers);
-        aboutDevelopersModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
         return root;
     }
 }

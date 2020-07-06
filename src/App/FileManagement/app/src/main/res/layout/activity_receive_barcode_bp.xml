@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <SurfaceView
-        android:id="@+id/surfaceView2"
+        android:id="@+id/surfaceViewR"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -13,7 +13,7 @@
         android:layout_centerVertical="true" />
 
     <TextView
-        android:id="@+id/txtBarcodeValue2"
+        android:id="@+id/txtBarcodeValueR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

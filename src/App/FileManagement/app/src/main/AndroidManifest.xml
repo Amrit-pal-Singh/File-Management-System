@@ -11,9 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityViewFile"></activity>
+        <activity android:name=".ActivityPlanToSendItem"></activity>
+        <activity android:name=".activity_receive_barcode_bp" />
+        <activity android:name=".activity_approve_disapprove_barcode_bp" />
+        <activity android:name=".ActivityViewFile" />
+        <activity android:name=".ReceiveItemActivity" />
         <activity android:name=".activity_plan_to_send_barcode_bp" />
         <activity android:name=".activity_batch_processing_plan_to_send" />
+        <activity android:name=".activity_batch_processing_approve_disapprove" />
+        <activity android:name=".activity_batch_processing_receive" />
         <activity android:name=".ApproveDisapproveItemActivity" />
         <activity
             android:name=".FrontPageActivity"
@@ -36,11 +42,11 @@
             android:label="@string/title_activity_main_activity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 

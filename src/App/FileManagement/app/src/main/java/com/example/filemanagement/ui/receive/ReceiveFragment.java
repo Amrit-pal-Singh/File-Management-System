@@ -31,11 +31,9 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 
-
 public class ReceiveFragment extends Fragment {
 
     private ReceiveViewModel receiveViewModel;
-
     SurfaceView surfaceView;
     TextView txtBarcodeValue;
     private BarcodeDetector barcodeDetector;
@@ -56,8 +54,8 @@ public class ReceiveFragment extends Fragment {
     }
 
     private void initViews() {
-        txtBarcodeValue = root.findViewById(R.id.txtBarcodeValue);
-        surfaceView = root.findViewById(R.id.surfaceView);
+        txtBarcodeValue = root.findViewById(R.id.txtBarcodeValue1);
+        surfaceView = root.findViewById(R.id.surfaceView1);
     }
 
     private void initialiseDetectorsAndSources() {

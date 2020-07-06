@@ -4,45 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ActivityPlanToSendItem"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textBPO"
+        android:id="@+id/textP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="20sp"
-        android:text="Select option for batch processing"></TextView>
+        android:text="Item name and details"></TextView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="center|bottom"
         android:orientation="vertical" >
         <Button
-            android:id="@+id/plan_to_send_bp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
-            android:layout_marginHorizontal="80dp"
-            android:text="plan to send"></Button>
+            android:text="Send"></Button>
 
         <Button
-            android:id="@+id/approve_disapprove_btn_bp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
-            android:layout_marginHorizontal="80dp"
-            android:text="approve/disapprove"></Button>
-
-        <Button
-            android:id="@+id/receive_btn_bp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:layout_marginHorizontal="80dp"
-            android:text="Receive"></Button>
+            android:text="Discard"></Button>
     </LinearLayout>
 
 </LinearLayout>
