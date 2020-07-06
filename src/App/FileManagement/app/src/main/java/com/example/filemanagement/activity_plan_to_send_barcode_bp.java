@@ -95,7 +95,7 @@ public class activity_plan_to_send_barcode_bp extends AppCompatActivity {
                         @Override
                         public void run() {
                             intentData = barcodes.valueAt(0).displayValue;
-                            startActivity(new Intent(getApplicationContext(), ApproveDisapproveItemActivity.class).putExtra("BarcodeData", intentData));
+                            startActivity(new Intent(getApplicationContext(), activity_batch_processing_plan_to_send.class).putExtra("BarcodeData", intentData));
                         }
                     });
                 }

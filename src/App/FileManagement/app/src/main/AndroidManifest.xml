@@ -13,6 +13,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ActivityViewFile"></activity>
         <activity android:name=".activity_plan_to_send_barcode_bp" />
+        <activity android:name=".activity_batch_processing_plan_to_send" />
         <activity android:name=".ApproveDisapproveItemActivity" />
         <activity
             android:name=".FrontPageActivity"
