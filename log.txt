@@ -1,3 +1,53 @@
+commit e2d40c30b767f594c130e204cff333335be1d079 (HEAD -> master, origin/master, origin/HEAD)
+Author: Abhishek <yadavask15847@gmail.com>
+Date:   Mon Jul 6 19:29:36 2020 +0530
+
+    Database Manager updated
+
+commit 6b642efbe2a8a13baab1994da0c94ce84614795e
+Author: Abhishek <yadavask15847@gmail.com>
+Date:   Mon Jul 6 19:26:35 2020 +0530
+
+    Bug Fix# Rest Api Integration for View my Files
+
+commit 347767cd72bbfdf314b9a793c72027534c5c6598
+Author: Jai Garg <jaigarg1499@gmail.com>
+Date:   Mon Jul 6 16:51:35 2020 +0530
+
+    Batch Processing barcode and layouts, Plan to send and receive activities, about developers page added and some bug fixes
+
+commit 85b37001c95828b93b1e4e9d3b9fac82c3b41e84
+Author: code-bandit <45354471+code-bandit@users.noreply.github.com>
+Date:   Mon Jul 6 13:09:33 2020 +0530
+
+    bug resolved
+
+commit b948762e1ff6aa51ac949c2ff6a06c1565e0faae
+Merge: 7d323a7 ebbf7a5
+Author: code-bandit <45354471+code-bandit@users.noreply.github.com>
+Date:   Sun Jul 5 20:41:53 2020 +0530
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 7d323a76f67202f77f9453914819ec311a8eb93e
+Author: code-bandit <45354471+code-bandit@users.noreply.github.com>
+Date:   Sun Jul 5 20:41:30 2020 +0530
+
+    barcode added to batch processing plan to send
+
+commit ebbf7a5fdc6421377e7c6c268e5f1aa7b6ef3401
+Merge: a9459e6 601729e
+Author: Abhishek <yadavask15847@gmail.com>
+Date:   Sun Jul 5 20:25:03 2020 +0530
+
+    Merge remote-tracking branch 'origin/master'
+
+commit a9459e67a0f0e7894bc05ce3b58fd1aa140db6d5
+Author: Abhishek <yadavask15847@gmail.com>
+Date:   Sun Jul 5 20:22:33 2020 +0530
+
+    Rest Api Integrated for View my Files
+
 commit a056d7a9eef96bd5f78f198e9e6c518a72cf7a9b
 Author: code-bandit <ripudamansingh1807@gmail.com>
 Date:   Sun Jul 5 15:22:17 2020 +0530
