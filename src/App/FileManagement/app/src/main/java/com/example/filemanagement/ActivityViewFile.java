@@ -9,8 +9,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +30,7 @@ public class ActivityViewFile extends AppCompatActivity {
         setContentView(R.layout.activity_view_file);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://63daa718bc0c.ngrok.io/")
+                .baseUrl("http://192.168.43.154:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -39,22 +42,39 @@ public class ActivityViewFile extends AppCompatActivity {
 
 
     private void getPosts(){
-        Call<List<Post>> call = placeHolderRestApi.getPosts("Token 26eb401a1957223c085e8f62062332e2e35521cd");
+        Call<JsonObject> call = placeHolderRestApi.getPosts("Token a177092974d276852aa8c638cf6823e0f1a89972");
 
-        call.enqueue(new Callback<List<Post>>() {
+        call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                JsonObject jsonObject = response.body();
+
                 final ListView list = findViewById(R.id.myFilesList);
                 ArrayList<String> arrayList = new ArrayList<>();
-                arrayList.add("File 1");
-                arrayList.add("File 2");
-                arrayList.add("File 3");
-                arrayList.add("File 4");
+                arrayList.add("Demo File 1");
+
+                for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){
+                    JsonObject jsonFile = entry.getValue().getAsJsonObject();
+                    StringBuilder file = new StringBuilder();
+                    try {
+                        file.append(jsonFile.get("qr").toString()).append(" | ");
+                        file.append(jsonFile.get("name").toString()).append(" | ");
+                        file.append(jsonFile.get("time_generated").toString()).append(" | ");
+                        file.append(jsonFile.get("restarted").toString()).append(" | ");
+                        file.append(jsonFile.get("path").toString()).append(" | ");
+                        file.append(jsonFile.get("plan_to_send").toString()).append(" | ");
+                        file.append(jsonFile.get("approved").toString()).append(" | ");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    arrayList.add(file.toString().replaceAll("\"", ""));
+                }
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ActivityViewFile.this,
                         android.R.layout.simple_list_item_1, arrayList);
@@ -69,22 +89,12 @@ public class ActivityViewFile extends AppCompatActivity {
                     }
                 });
 
-                //List<Post> posts = response.body();
-                for (int i=0; i < 2; i++){
-                    //for (Post post : posts){
-                    String content = "Success: ";
-//                    content += "ID: " + post.getId() + "\n";
-//                    content += "User ID: " + post.getUserId() + "\n";
-//                    content += "Title: " + post.getTitle() + "\n";
-//                    content += "Text: " + post.getText() + "\n\n";
-
-                    Toast.makeText(getApplicationContext(), content, Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failure: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

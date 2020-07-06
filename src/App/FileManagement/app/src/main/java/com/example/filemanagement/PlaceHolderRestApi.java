@@ -1,6 +1,6 @@
 package com.example.filemanagement;
 
-import java.util.List;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -27,7 +27,7 @@ public interface PlaceHolderRestApi {
 
     //@Headers("Authorization: Token 26eb401a1957223c085e8f62062332e2e35521cd")
     @GET("api/v1/db/generated_files/")
-    Call<List<Post>> getPosts(@Header("Authorization") String userKey);
+    Call<JsonObject> getPosts(@Header("Authorization") String userKey);
 
     @POST("api/v1/db/login/")
     Call<Post> createPost(@Body Post post);

@@ -5,6 +5,7 @@ from database_management.models import (
     File,
     User,
     Role,
+    AppUser,
 )
 from rest_framework.permissions import (
 	IsAuthenticated,
@@ -36,12 +37,15 @@ class CustomAuthToken(ObtainAuthToken):
         response = super(CustomAuthToken, self).post(request, *args, **kwargs)
         token = Token.objects.get(key=response.data['token'])
         user = get_object_or_404(User, email=token.user.email)
-        
+        app_user = get_object_or_404(AppUser, user=user)
+        if(app_user == None):
+            return
+        print("$$$$$$$$$$$$$$$$$$")
         first_name = user.first_name
         last_name = user.last_name
         roles_dict = {}
         index = 0
-        for i in user.roles.all():
+        for i in app_user.roles.all():
             roles_dict[index] ={'name': i.name, 'department': i.department} 
             index += 1
 
@@ -51,35 +55,8 @@ class CustomAuthToken(ObtainAuthToken):
                         'first_name': first_name,
                         'last_name': last_name,
                         'roles': roles_dict
-        })
+        }, status=status.HTTP_200_OK)
         
-
-class AddUser(mixins.CreateModelMixin,
-                viewsets.GenericViewSet):
-    
-    authentication_classes = (TokenAuthentication, )
-    permission_classes = (IsAuthenticated, )
-    serializer_class = AddUserSerializer
-    queryset = User.objects.all()
-    def create(self, request, *args, **kwargs):
-        self.serializer = self.get_serializer(data=request.data)
-        self.serializer.is_valid(raise_exception=True)
-        email = self.serializer.validated_data['email']
-        password = self.serializer.validated_data['password']
-        # self.serializer.validated_data['password'] = make_password(self.serializer.validated_data['password'])
-        # password = self.serializer.validated_data['password']
-        
-        # username, email, password
-        try:
-            user = User.objects.create_user(email, password)
-            user.first_name = self.serializer.validated_data['first_name']
-            user.last_name = self.serializer.validated_data['last_name']
-            user.email = email
-            user.save()
-        except:
-            return Response({'error': 'User cannot be created'}, status=status.HTTP_400_BAD_REQUEST)
-        return Response(self.serializer.validated_data, status=status.HTTP_201_CREATED)
-
 
 
 class CreateFile(mixins.CreateModelMixin,
@@ -90,66 +67,44 @@ class CreateFile(mixins.CreateModelMixin,
     queryset = File.objects.all()
     def create(self, request, *args, **kwargs):
         self.serializer = self.get_serializer(data=request.data)
-        self.serializer.is_valid(raise_exception=true)
+        self.serializer.is_valid(raise_exception=True)
         qr = self.serializer.validated_data['qr']
+
+        # if(File.objects.filter(qr=qr) is not None):
+        #     print("T^^^^^^^^^^^^^")
+        #     file_object = get_object_or_404(File, qr=qr)
+        #     file_object.restarted = True
+        #     return Response(self, serializer.validated_data, status=status.HTTP_200_OK)
+
         name = self.serializer.validated_data['name']
-        user = request.user
+        user_logined = request.user
+        print("@@@@@@@@@@")
+        print(user_logined.first_name, "#########")
+        app_user = get_object_or_404(AppUser, user=user_logined)
         time_generated = datetime.now()
         restarted = False
-        path = File.set_path("")
+        path = "Begin"
         approved = False
-
-
-        # how to add plan to send. 
-        # try to add blank=true in model check if it is allowed
-        file = File.objects.create(qr=qr,name=name,user=user,time_generated=time_generated,restarted=restarted,path=path,approved=approved)
-        
-        # i dont think this is required but still try it.
-        file.save();
+        file = File.objects.create(qr=qr,name=name,user=app_user,time_generated=time_generated,restarted=restarted,path=path,approved=approved)
         return Response(self.serializer.validated_data, status=status.HTTP_201_CREATED)        
 
 
 
-
-
-class ListUsers(APIView):
-    authentication_classes = (TokenAuthentication, )
-    permission_classes = (IsAdminUser, IsAuthenticated)
-    queryset = User.objects.all()
-    def get(self, request, *args, **kwargs):
-        objects = User.objects.all()
-        dictUsers = {}
-        index = 1
-        for obj in objects:
-            roles_dict = {}
-            i = 0
-            for i in obj.roles.all():
-                roles_dict[index] ={'name': i.name, 'department': i.department} 
-                index += 1
-
-            dictUsers[index] = {'name': str(obj.first_name+" "+obj.last_name),'email': str(obj.email), 'roles': roles_dict}
-            index+=1
-        print(dictUsers)
-        
-        dictUsersDump = json.dumps(dictUsers)
-        jsonUser = json.loads(dictUsersDump)
-        return Response(jsonUser, status=status.HTTP_200_OK)
-        # return JsonResponse(dictUsers)
-
-class AllRolesOfUser(APIView):
+class recieveFile(generics.UpdateAPIView):
+    # add to the path.
     authentication_classes = (TokenAuthentication, )
     permission_classes = (IsAuthenticated, )
-    def get(self, request, *args, **kwargs):
+    def update(self, request, *args, **kwargs):
         user_logined = request.user
-        roles = user_logined.roles.all()
-        dict_roles = {}
-        index = 1
-        for role in roles:
-            dict_roles[role.name] = role.department       
-        print(dict_roles)
-        dictRolesDump = json.dumps(dict_roles)
-        jsonUser = json.loads(dictRolesDump)
-        return Response(jsonUser, status=status.HTTP_200_OK)
+        app_user = get_object_or_404(AppUser, user = user_logined)
+        qr = self.serializer.validated_data['qr']
+        role = self.serializer.validated_data['role']
+        department = self.serializer.validated_data['department']
+        path = role+"#"+department+"#"+app_user.user.email
+        file = File.objects.filter(qr=qr)
+        file.update(path=file.path+path+"+")
+        return Response(self.serializer.validated_data, status=status.HTTP_200_OK)
+
 
 
 class ViewMyGeneratedFiles(APIView):
@@ -157,25 +112,64 @@ class ViewMyGeneratedFiles(APIView):
     permission_classes = (IsAuthenticated, )
     def get(self, request, *args, **kwargs):            
         user_logined = request.user
-        files = Files.objects.filter(user=user_logined)        
+        app_user = get_object_or_404(AppUser, user = user_logined)
+        files = File.objects.all().filter(user=app_user)        
+        print(files)
         dict_files = {}
-        index = 1
+        index = 0
         for file in files:
             dict_files[index] = {'qr': file.qr,
                                 'name':file.name,
-                                'time_generated':file.time_generated,
+                                'time_generated':str(file.time_generated),
                                 'restarted':file.restarted,
-                                'path':file.get_path(),
+                                'path':file.path,
                                 'plan_to_send':file.plan_to_send,
                                 'approved':file.approved}    
             index += 1
-        dictFilesDump = json.dumps(dict_files)
-        jsonFiles = json.loads(dictFilesDump)
-        return Response(jsonFiles, status=status.HTTP_200_OK)
-
+        dict_files_dump = json.dumps(dict_files)
+        json_files = json.loads(dict_files_dump)
+        return Response(json_files, status=status.HTTP_200_OK)
 
 class ViewMyApprovedDisapprovedFiles():
     pass
 
+class ListRole(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
+    def get(self, request, *args, **kwargs):
+        user_logined = request.user
+        app_user = get_object_or_404(AppUser, user=user_logined)
+        print(user_logined.first_name, '@@@@@', app_user.roles.all())
+        roles_dict = {}     
+        index = 0   
+        for i in app_user.roles.all():
+            roles_dict[index] ={'name': i.name, 'department': i.department} 
+            index += 1
+
+        dictRolesDump = json.dumps(roles_dict)
+        jsonRoles = json.loads(dictRolesDump)
+        
+        return Response(jsonRoles, status=status.HTTP_200_OK)
+
+
+class ApproveFile():
+    pass
+
+
+class DisApproveFile():
+    pass
+
+
+class PlanToSend():
+    # plan to send file
+    pass
+
+
+class ViewMyPlanToSendFiles():
+    pass    
+
+class searchFile():
+    pass
+    # give the id of the file or the name of the file.
 
