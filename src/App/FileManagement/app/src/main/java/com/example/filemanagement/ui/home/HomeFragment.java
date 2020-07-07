@@ -16,11 +16,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.filemanagement.ActivityViewFile;
+import com.example.filemanagement.PlaceHolderRestApi;
 import com.example.filemanagement.R;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
@@ -39,15 +49,11 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
-        //Hard Coded Data
+
 
         categories.add("Select Role");
-        categories.add("Automobile");
-        categories.add("Business Services");
-        categories.add("Computers");
-        categories.add("Education");
-        categories.add("Personal");
-        categories.add("Travel");
+
+        getRoles();
 
         //
         try {
@@ -93,5 +99,46 @@ public class HomeFragment extends Fragment {
         });
 
         return root;
+    }
+
+    private void getRoles(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PlaceHolderRestApi.base_url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        PlaceHolderRestApi placeHolderRestApi = retrofit.create(PlaceHolderRestApi.class);
+
+        Call<JsonObject> call = placeHolderRestApi.getRoles("Token a177092974d276852aa8c638cf6823e0f1a89972");
+
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(!response.isSuccessful()){
+                    categories.add("Unsuccessful: " + response.code());
+                    return;
+                }
+
+                JsonObject jsonObject = response.body();
+
+                for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){
+                    JsonObject jsonRoles = entry.getValue().getAsJsonObject();
+                    StringBuilder role = new StringBuilder();
+                    try {
+                        role.append(jsonRoles.get("name").toString()).append(" | ");
+                        role.append(jsonRoles.get("department").toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    categories.add(role.toString().replaceAll("\"", ""));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                categories.add("Failure: " + t.getMessage());
+            }
+        });
     }
 }

@@ -30,7 +30,7 @@ public class ActivityViewFile extends AppCompatActivity {
         setContentView(R.layout.activity_view_file);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.43.154:8000/")
+                .baseUrl(PlaceHolderRestApi.base_url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -42,21 +42,22 @@ public class ActivityViewFile extends AppCompatActivity {
 
 
     private void getPosts(){
+        final ListView list = findViewById(R.id.myFilesList);
+
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Demo File 1");
+
         Call<JsonObject> call = placeHolderRestApi.getPosts("Token a177092974d276852aa8c638cf6823e0f1a89972");
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(!response.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    arrayList.add("Unsuccessful: " + response.code());
                     return;
                 }
 
                 JsonObject jsonObject = response.body();
-
-                final ListView list = findViewById(R.id.myFilesList);
-                ArrayList<String> arrayList = new ArrayList<>();
-                arrayList.add("Demo File 1");
 
                 for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){
                     JsonObject jsonFile = entry.getValue().getAsJsonObject();
@@ -76,25 +77,26 @@ public class ActivityViewFile extends AppCompatActivity {
                     arrayList.add(file.toString().replaceAll("\"", ""));
                 }
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ActivityViewFile.this,
-                        android.R.layout.simple_list_item_1, arrayList);
-
-                list.setAdapter(arrayAdapter);
-
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String clickedItem=(String) list.getItemAtPosition(position);
-                        Toast.makeText(ActivityViewFile.this,clickedItem,Toast.LENGTH_LONG).show();
-                    }
-                });
-
                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Failure: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                arrayList.add("Failure: " + t.getMessage());
+
+            }
+        });
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ActivityViewFile.this,
+                android.R.layout.simple_list_item_1, arrayList);
+
+        list.setAdapter(arrayAdapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String clickedItem=(String) list.getItemAtPosition(position);
+                Toast.makeText(ActivityViewFile.this,clickedItem,Toast.LENGTH_LONG).show();
             }
         });
     }

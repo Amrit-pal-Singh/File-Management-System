@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         //textViewResult = findViewById((R.id.text_view_result));
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.43.154:8000/")
+                .baseUrl(PlaceHolderRestApi.base_url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

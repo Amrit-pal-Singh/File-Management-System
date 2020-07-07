@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         textViewResult = findViewById((R.id.text_view_result));
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://63daa718bc0c.ngrok.io/")
+                .baseUrl(PlaceHolderRestApi.base_url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

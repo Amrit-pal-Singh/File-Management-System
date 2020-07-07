@@ -10,6 +10,8 @@ import retrofit2.http.POST;
 
 public interface PlaceHolderRestApi {
 
+    String base_url = "http://192.168.43.154:8000/";
+
     /**
      * You can also pass header with dynamic value as below
      *
@@ -26,8 +28,12 @@ public interface PlaceHolderRestApi {
      * */
 
     //@Headers("Authorization: Token 26eb401a1957223c085e8f62062332e2e35521cd")
+
+    @GET("/api/v1/db/roles/")
+    Call<JsonObject> getRoles(@Header("Authorization") String userToken);
+
     @GET("api/v1/db/generated_files/")
-    Call<JsonObject> getPosts(@Header("Authorization") String userKey);
+    Call<JsonObject> getPosts(@Header("Authorization") String userToken);
 
     @POST("api/v1/db/login/")
     Call<Post> createPost(@Body Post post);
