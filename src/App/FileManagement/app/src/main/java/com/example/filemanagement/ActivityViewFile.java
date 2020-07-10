@@ -30,18 +30,18 @@ public class ActivityViewFile extends AppCompatActivity {
         setContentView(R.layout.activity_view_file);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PlaceHolderRestApi.base_url)
+                .baseUrl(PlaceHolderRestApi.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         placeHolderRestApi = retrofit.create(PlaceHolderRestApi.class);
 
-        getPosts();
+        getFilesFun();
 
     }
 
 
-    private void getPosts(){
+    private void getFilesFun(){
         final ListView list = findViewById(R.id.myFilesList);
 
         ArrayList<String> arrayList = new ArrayList<>();
@@ -49,7 +49,7 @@ public class ActivityViewFile extends AppCompatActivity {
 
         //Token for Jai: "Token a177092974d276852aa8c638cf6823e0f1a89972"
 
-        Call<JsonObject> call = placeHolderRestApi.getPosts(LoginActivity.TOKEN);
+        Call<JsonObject> call = placeHolderRestApi.getFiles(LoginActivity.TOKEN);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -68,10 +68,10 @@ public class ActivityViewFile extends AppCompatActivity {
                     try {
                         file.append(jsonFile.get("qr").toString()).append(" | ");
                         file.append(jsonFile.get("name").toString()).append(" | ");
-                        file.append(jsonFile.get("time_generated").toString()).append(" | ");
-                        file.append(jsonFile.get("restarted").toString()).append(" | ");
-                        file.append(jsonFile.get("path").toString()).append(" | ");
-                        file.append(jsonFile.get("plan_to_send").toString()).append(" | ");
+                        //file.append(jsonFile.get("time_generated").toString()).append(" | ");
+                        //file.append(jsonFile.get("restarted").toString()).append(" | ");
+                        //file.append(jsonFile.get("path").toString()).append(" | ");
+                        //file.append(jsonFile.get("plan_to_send").toString()).append(" | ");
                         file.append(jsonFile.get("approved").toString()).append(" | ");
                     } catch (Exception e) {
                         e.printStackTrace();

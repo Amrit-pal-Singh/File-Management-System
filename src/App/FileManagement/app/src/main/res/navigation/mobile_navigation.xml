@@ -18,6 +18,13 @@
         tools:layout="@layout/fragment_batch_processing" />
 
     <fragment
+        android:id="@+id/nav_generate_file"
+        android:name="com.example.filemanagement.ui.generateFile.GenerateFileFragment"
+        android:label="@string/menu_generate_file"
+        tools:layout="@layout/fragment_generate_file" />
+
+
+    <fragment
         android:id="@+id/nav_plan_to_send"
         android:name="com.example.filemanagement.ui.planToSend.PlanToSendFragment"
         android:label="@string/menu_plan_to_send"

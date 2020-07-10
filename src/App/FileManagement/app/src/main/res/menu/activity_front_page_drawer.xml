@@ -12,6 +12,12 @@
             android:id="@+id/nav_batch_processing"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_batch_processing" />
+
+        <item
+            android:id="@+id/nav_generate_file"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_generate_file" />
+
         <item
             android:id="@+id/nav_plan_to_send"
             android:icon="@drawable/ic_menu_slideshow"

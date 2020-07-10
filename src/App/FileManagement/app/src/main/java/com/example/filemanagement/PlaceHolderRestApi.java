@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 
 public interface PlaceHolderRestApi {
 
-    String base_url = "http://192.168.43.154:8000/";
+    String BASE_URL = "http://ce5c83243db6.ngrok.io/";
 
     String token = "";
 
@@ -29,10 +29,13 @@ public interface PlaceHolderRestApi {
     @POST("api/v1/db/login/")
     Call<LoginCredentials> apiLogin(@Body LoginCredentials loginCredentials);
 
+    @POST("api/v1/db/add_file/")
+    Call<JsonObject> addFile(@Body JsonObject jsonObject);
+
     @GET("api/v1/db/roles/")
     Call<JsonObject> getRoles(@Header("Authorization") String userToken);
 
     @GET("api/v1/db/generated_files/")
-    Call<JsonObject> getPosts(@Header("Authorization") String userToken);
+    Call<JsonObject> getFiles(@Header("Authorization") String userToken);
 
 }

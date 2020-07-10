@@ -23,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     private PlaceHolderRestApi placeHolderRestApi;
     public static String TOKEN = null;
 
+    private int remove_it_later = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         //textViewResult = findViewById((R.id.text_view_result));
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PlaceHolderRestApi.base_url)
+                .baseUrl(PlaceHolderRestApi.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -68,7 +70,17 @@ public class LoginActivity extends AppCompatActivity {
 
         apiLogin(mEmail.getText().toString(), mPassword.getText().toString());
 
-        startActivity(new Intent(this, FrontPageActivity.class));
+
+        if(TOKEN == null){
+            Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
+            remove_it_later++;
+        }
+        else {
+            startActivity(new Intent(this, FrontPageActivity.class));
+        }
+        if(remove_it_later > 2){
+            startActivity(new Intent(this, FrontPageActivity.class));
+        }
     }
 
     private void apiLogin(String email, String password){
