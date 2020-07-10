@@ -19,7 +19,7 @@ print("""
 """)
 
 # base_url = 'http://612f39a4af3b.ngrok.io/'
-base_url = "http://192.168.43.154:8000/"
+base_url = "http://192.168.1.8:8000/"
 
 
 url_login = base_url+'api/v1/db/login/'

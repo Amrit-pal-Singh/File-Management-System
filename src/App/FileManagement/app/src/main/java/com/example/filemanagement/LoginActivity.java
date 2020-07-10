@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,8 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
     private static String LOG_TAG = "Login Activity";
 
-    private TextView textViewResult;
     private PlaceHolderRestApi placeHolderRestApi;
+    protected static String TOKEN = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,43 +66,51 @@ public class LoginActivity extends AppCompatActivity {
 
         placeHolderRestApi = retrofit.create(PlaceHolderRestApi.class);
 
-        createPost(mEmail.getText().toString(), mPassword.getText().toString());
+        apiLogin(mEmail.getText().toString(), mPassword.getText().toString());
 
         startActivity(new Intent(this, FrontPageActivity.class));
     }
 
-    private void createPost(String email, String password){
-        Post post = new Post(email, password);
+    private void apiLogin(String email, String password){
 
-        Call<Post> call = placeHolderRestApi.createPost(post);
+        //Default login credentials for testing
+        if(email.equals("")){
+            email = "jai69@gmail.com";
+            password = "new_pass_123";
+        }
 
-        call.enqueue(new Callback<Post>() {
+        LoginCredentials loginCredentials = new LoginCredentials(email, password);
+
+        Call<LoginCredentials> call = placeHolderRestApi.apiLogin(loginCredentials);
+
+        call.enqueue(new Callback<LoginCredentials>() {
             @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
+            public void onResponse(Call<LoginCredentials> call, Response<LoginCredentials> response) {
 
                 if(!response.isSuccessful()){
-                    //textViewResult.setText("Code: " + response.code());
                     Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                Post postResponse = response.body();
+                LoginCredentials loginCredentials = response.body();
+
+                TOKEN = "Token " + loginCredentials.getToken();
 
                 String content = "";
                 content += "Code: " + response.code() + "\n";
-                content += "ID: " + postResponse.getUsername() + "\n";
-                content += "User ID: " + postResponse.getPassword() + "\n";
+                content += "Token: " + loginCredentials.getToken() + "\n";
+                content += "Email: " + loginCredentials.getEmail() + "\n";
+                content += "Full Name: " + loginCredentials.getFirst_name() + " "
+                        + loginCredentials.getLast_name() + "\n";
 
-                //textViewResult.setText(content);
-                Toast.makeText(getApplicationContext(), content, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Call<Post> call, Throwable t) {
-                //textViewResult.setText(t.getMessage());
+            public void onFailure(Call<LoginCredentials> call, Throwable t) {
+
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

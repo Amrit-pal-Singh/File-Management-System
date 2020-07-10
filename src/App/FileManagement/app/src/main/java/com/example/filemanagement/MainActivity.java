@@ -3,6 +3,7 @@ package com.example.filemanagement;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,32 +40,35 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void createPost(){
-        Post post = new Post("jai69@gmail.com", "new_pass_123");
+        LoginCredentials loginCredentials = new LoginCredentials("jai69@gmail.com", "new_pass_123");
 
-        Call<Post> call = placeHolderRestApi.createPost(post);
+        Call<LoginCredentials> call = placeHolderRestApi.apiLogin(loginCredentials);
 
-        call.enqueue(new Callback<Post>() {
+        call.enqueue(new Callback<LoginCredentials>() {
             @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
+            public void onResponse(Call<LoginCredentials> call, Response<LoginCredentials> response) {
 
                 if(!response.isSuccessful()){
-                    textViewResult.setText("Code: " + response.code());
+                    //textViewResult.setText("Code: " + response.code());
+                    //Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                Post postResponse = response.body();
+                LoginCredentials loginCredentials = response.body();
 
                 String content = "";
                 content += "Code: " + response.code() + "\n";
-                content += "ID: " + postResponse.getUsername() + "\n";
-                content += "User ID: " + postResponse.getPassword() + "\n";
+                content += "Token: " + loginCredentials.getToken() + "\n";
+                content += "Email: " + loginCredentials.getEmail() + "\n";
 
-                textViewResult.setText(content);
+                //textViewResult.setText(content);
+                Toast.makeText(getApplicationContext(), content, Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<Post> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
+            public void onFailure(Call<LoginCredentials> call, Throwable t) {
+                //textViewResult.setText(t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
