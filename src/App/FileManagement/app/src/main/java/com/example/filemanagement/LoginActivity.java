@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private static String LOG_TAG = "Login Activity";
 
     private PlaceHolderRestApi placeHolderRestApi;
-    protected static String TOKEN = "";
+    public static String TOKEN = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginCredentials> call, Response<LoginCredentials> response) {
 
                 if(!response.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Unsuccessful: " + response.code(), Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginCredentials> call, Throwable t) {
 
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

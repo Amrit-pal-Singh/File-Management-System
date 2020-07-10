@@ -47,13 +47,16 @@ public class ActivityViewFile extends AppCompatActivity {
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Demo File 1");
 
-        Call<JsonObject> call = placeHolderRestApi.getPosts("Token a177092974d276852aa8c638cf6823e0f1a89972");
+        //Token for Jai: "Token a177092974d276852aa8c638cf6823e0f1a89972"
+
+        Call<JsonObject> call = placeHolderRestApi.getPosts(LoginActivity.TOKEN);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(!response.isSuccessful()){
-                    arrayList.add("Unsuccessful: " + response.code());
+
+                    Toast.makeText(getApplicationContext(), "Unsuccessful: " + response.code(), Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -75,6 +78,19 @@ public class ActivityViewFile extends AppCompatActivity {
                     }
 
                     arrayList.add(file.toString().replaceAll("\"", ""));
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ActivityViewFile.this,
+                            android.R.layout.simple_list_item_1, arrayList);
+
+                    list.setAdapter(arrayAdapter);
+
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String clickedItem=(String) list.getItemAtPosition(position);
+                            Toast.makeText(ActivityViewFile.this,clickedItem,Toast.LENGTH_LONG).show();
+                        }
+                    });
+
                 }
 
                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
@@ -82,22 +98,9 @@ public class ActivityViewFile extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                arrayList.add("Failure: " + t.getMessage());
-
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ActivityViewFile.this,
-                android.R.layout.simple_list_item_1, arrayList);
-
-        list.setAdapter(arrayAdapter);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String clickedItem=(String) list.getItemAtPosition(position);
-                Toast.makeText(ActivityViewFile.this,clickedItem,Toast.LENGTH_LONG).show();
-            }
-        });
     }
 }

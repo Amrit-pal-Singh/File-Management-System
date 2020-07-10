@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.filemanagement.ActivityViewFile;
+import com.example.filemanagement.LoginActivity;
 import com.example.filemanagement.PlaceHolderRestApi;
 import com.example.filemanagement.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -109,7 +110,14 @@ public class HomeFragment extends Fragment {
 
         PlaceHolderRestApi placeHolderRestApi = retrofit.create(PlaceHolderRestApi.class);
 
-        Call<JsonObject> call = placeHolderRestApi.getRoles("Token a177092974d276852aa8c638cf6823e0f1a89972");
+        //Token for Jai: "Token a177092974d276852aa8c638cf6823e0f1a89972"
+        if(LoginActivity.TOKEN == null){
+            categories.add("NULL");
+        }
+        else
+            categories.add(LoginActivity.TOKEN);
+
+        Call<JsonObject> call = placeHolderRestApi.getRoles(LoginActivity.TOKEN);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
