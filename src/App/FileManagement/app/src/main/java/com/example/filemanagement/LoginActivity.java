@@ -70,8 +70,9 @@ public class LoginActivity extends AppCompatActivity {
 
         apiLogin(mEmail.getText().toString(), mPassword.getText().toString());
 
+        while(TOKEN == null) { }
 
-        if(TOKEN == null){
+        if(TOKEN.equals("false")){
             Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
             remove_it_later++;
         }
