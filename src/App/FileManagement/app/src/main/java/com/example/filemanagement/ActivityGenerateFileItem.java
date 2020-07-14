@@ -29,7 +29,6 @@ public class ActivityGenerateFileItem extends AppCompatActivity {
             text.setText(barcode_data);
 
             EditText editText = findViewById(R.id.file_name);
-            String file_name = editText.getText().toString();
 
             // Send data to api
             findViewById(R.id.add_file_btn).setOnClickListener(v -> {
@@ -40,7 +39,7 @@ public class ActivityGenerateFileItem extends AppCompatActivity {
 
                 placeHolderRestApi = retrofit.create(PlaceHolderRestApi.class);
 
-                addFile(file_name, barcode_data);
+                addFile(editText.getText().toString(), barcode_data);
             });
         }
     }
@@ -48,7 +47,7 @@ public class ActivityGenerateFileItem extends AppCompatActivity {
     private void addFile(String file_name, String barcode_data){
         if(file_name.equals("")){
             //Temporary/default name for file
-            file_name = "Advitiya Refund";
+            file_name = "Default Name";
         }
 
         JsonObject jsonObject = new JsonObject();

@@ -71,17 +71,21 @@ public class LoginActivity extends AppCompatActivity {
         apiLogin(mEmail.getText().toString(), mPassword.getText().toString());
 
 
-        if(TOKEN == null || TOKEN.equals("Login_Unsuccessful") || TOKEN.equals("Login_Failed")){
-            Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show();
-            remove_it_later++;
-        }
-        else {
-            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+        if(TOKEN != null){
             startActivity(new Intent(this, FrontPageActivity.class));
         }
-        if(remove_it_later > 2){
-            startActivity(new Intent(this, FrontPageActivity.class));
-        }
+
+//        if(TOKEN == null || TOKEN.equals("Login_Unsuccessful") || TOKEN.equals("Login_Failed")){
+//            Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show();
+//            remove_it_later++;
+//        }
+//        else {
+//            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(this, FrontPageActivity.class));
+//        }
+//        if(remove_it_later > 2){
+//            startActivity(new Intent(this, FrontPageActivity.class));
+//        }
     }
 
     private void apiLogin(String email, String password){
@@ -99,25 +103,26 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<LoginCredentials>() {
             @Override
             public void onResponse(Call<LoginCredentials> call, Response<LoginCredentials> response) {
+                if(response.isSuccessful()) {
 
-                if(!response.isSuccessful()){
+
+                    LoginCredentials loginCredentials = response.body();
+
+                    TOKEN = "Token " + loginCredentials.getToken();
+
+                    String content = "Welcome ";
+//                    content += "Code: " + response.code() + "\n";
+//                    content += "Token: " + loginCredentials.getToken() + "\n";
+//                    content += "Email: " + loginCredentials.getEmail() + "\n";
+                    content += "Full Name: " + loginCredentials.getFirst_name() + " "
+                            + loginCredentials.getLast_name() + "\n";
+
+                    Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
+                }
+                else{
                     Toast.makeText(getApplicationContext(), "Unsuccessful: " + response.code(), Toast.LENGTH_LONG).show();
                     TOKEN = "Login_Unsuccessful";
-                    return;
                 }
-
-                LoginCredentials loginCredentials = response.body();
-
-                TOKEN = "Token " + loginCredentials.getToken();
-
-                String content = "";
-                content += "Code: " + response.code() + "\n";
-                content += "Token: " + loginCredentials.getToken() + "\n";
-                content += "Email: " + loginCredentials.getEmail() + "\n";
-                content += "Full Name: " + loginCredentials.getFirst_name() + " "
-                        + loginCredentials.getLast_name() + "\n";
-
-                Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
             }
 
             @Override

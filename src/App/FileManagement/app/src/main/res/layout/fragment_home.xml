@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="center"
         android:layout_weight="0">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,41 +23,52 @@
                 android:scaleType="fitXY"
                 android:layout_centerInParent="true"
                 android:background="@drawable/profile_image_background"></ImageView>
+
             <TextView
                 android:id="@+id/profileName"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:text="Ripudaman Singh"
-                android:textColor="@color/whiteTextColor"
                 android:layout_below="@+id/profileImage"
-                android:textAlignment="center"></TextView>
+                android:textAlignment="center"
+                android:textColor="@color/whiteTextColor"></TextView>
+
             <TextView
                 android:id="@+id/hardCodedText_home"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:text="Current Role : Proff"
-                android:textColor="@color/whiteTextColor"
                 android:layout_below="@+id/profileName"
-                android:textAlignment="center"></TextView>
+                android:layout_marginTop="3dp"
+                android:text="Current Role : None"
+                android:textAlignment="center"
+                android:textColor="@color/whiteTextColor"
+                android:textSize="18sp"></TextView>
         </RelativeLayout>
         <Spinner
             android:id="@+id/role_selector"
-            android:layout_width="match_parent"
+            android:layout_width="230dp"
             android:layout_height="50dp"
+            android:paddingStart="10dp"
             android:prompt="@string/spinner_prompt_home"
             android:spinnerMode="dropdown"></Spinner>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="20dp"
+        android:paddingBottom="250dp"
         android:orientation="vertical"
         android:gravity="bottom|center"
         android:layout_weight="1">
+
         <Button
             android:id="@+id/viewFiles_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View Files"></Button>
+            android:backgroundTint="#170"
+            android:text="View Files"
+            android:textColor="@color/whiteTextColor"
+            android:textSize="20dp">
+
+        </Button>
 
     </LinearLayout>
 </LinearLayout>

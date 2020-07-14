@@ -72,7 +72,7 @@ public class ActivityViewFile extends AppCompatActivity {
                         //file.append(jsonFile.get("restarted").toString()).append(" | ");
                         //file.append(jsonFile.get("path").toString()).append(" | ");
                         //file.append(jsonFile.get("plan_to_send").toString()).append(" | ");
-                        file.append(jsonFile.get("approved").toString()).append(" | ");
+                        // file.append(jsonFile.get("approved").toString()).append(" | ");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
