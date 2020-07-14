@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityPlanToSendItem"></activity>
+        <activity android:name=".ActivityPlanToSendItem" />
+        <activity android:name=".ActivityGenerateFileItem" />
         <activity android:name=".activity_receive_barcode_bp" />
         <activity android:name=".activity_approve_disapprove_barcode_bp" />
         <activity android:name=".ActivityViewFile" />

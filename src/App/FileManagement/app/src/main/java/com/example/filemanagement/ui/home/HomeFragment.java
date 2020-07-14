@@ -52,19 +52,19 @@ public class HomeFragment extends Fragment {
 //        });
 
 
-        categories.add("Select Role");
-
-        getRoles();
-
         //
         try {
             roleSelectorSpinner = root.findViewById(R.id.role_selector);
         } catch (Exception e) {
             Log.e(TAG, "Spinner Role Selector Error!!");
         }
+
         if(categories.isEmpty()) {
-            categories.add("No Roles");
+            getRoles();
+            if(categories.isEmpty())
+                categories.add("No Roles");
         }
+
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, categories);
 
@@ -94,8 +94,7 @@ public class HomeFragment extends Fragment {
         viewFiles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            startActivity(new Intent(getContext(), ActivityViewFile.class));
-
+                startActivity(new Intent(getContext(), ActivityViewFile.class));
             }
         });
 

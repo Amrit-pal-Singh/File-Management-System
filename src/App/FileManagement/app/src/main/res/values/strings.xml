@@ -34,6 +34,9 @@
     <string name="menu_logout">LogOut</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="discard">Discard</string>
+    <string name="send">Send</string>
+    <string name="item_name_and_details">Item name and details</string>
 
 
 </resources>
