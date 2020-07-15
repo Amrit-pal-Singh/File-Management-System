@@ -80,8 +80,7 @@ public class HomeFragment extends Fragment {
                 String selectedString = roleSelectorSpinner.getItemAtPosition(position).toString();
                 if(selectedString != "Select Role"){
 //                    Toast.makeText(getContext(), "You Selected "+selectedString, Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view, "You Selected "+selectedString, Snackbar.LENGTH_SHORT)
-                            .setAction("Action", null).show();
+                    Snackbar.make(root, "You Selected "+selectedString, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                 }
             }
             @Override

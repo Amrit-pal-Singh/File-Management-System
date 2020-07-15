@@ -3,7 +3,6 @@ package com.example.filemanagement.ui.planToSend;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -11,15 +10,12 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.filemanagement.ActivityPlanToSendItem;
@@ -54,8 +50,8 @@ public class PlanToSendFragment extends Fragment {
     }
 
     private void initViews() {
-        txtBarcodeValue = root.findViewById(R.id.txtBarcodeValue2);
-        surfaceView = root.findViewById(R.id.surfaceView2);
+        txtBarcodeValue = root.findViewById(R.id.txtBarcodeValuePlanToSend);
+        surfaceView = root.findViewById(R.id.surfaceViewPlanToSend);
     }
 
     private void initialiseDetectorsAndSources() {
@@ -77,8 +73,7 @@ public class PlanToSendFragment extends Fragment {
                     if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         cameraSource.start(surfaceView.getHolder());
                     } else {
-                        ActivityCompat.requestPermissions(getActivity(), new
-                                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                     }
 
                 } catch (IOException e) {
