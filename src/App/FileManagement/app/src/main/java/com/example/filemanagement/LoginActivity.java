@@ -71,18 +71,18 @@ public class LoginActivity extends AppCompatActivity {
         apiLogin(mEmail.getText().toString(), mPassword.getText().toString());
 
 
-        if(TOKEN != null){
-            startActivity(new Intent(this, FrontPageActivity.class));
-        }
-
-//        if(TOKEN == null || TOKEN.equals("Login_Unsuccessful") || TOKEN.equals("Login_Failed")){
-//            Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show();
-//            remove_it_later++;
-//        }
-//        else {
-//            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+//        if(TOKEN != null){
 //            startActivity(new Intent(this, FrontPageActivity.class));
 //        }
+
+        if(TOKEN == null || TOKEN.equals("Login_Unsuccessful") || TOKEN.equals("Login_Failed")){
+            Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show();
+            remove_it_later++;
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, FrontPageActivity.class));
+        }
 //        if(remove_it_later > 2){
 //            startActivity(new Intent(this, FrontPageActivity.class));
 //        }
