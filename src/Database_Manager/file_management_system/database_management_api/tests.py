@@ -19,7 +19,7 @@ print("""
 """)
 
 # base_url = 'http://612f39a4af3b.ngrok.io/'
-base_url = "http://192.168.1.8:8000/"
+base_url = "http://127.0.0.1:8000/"
 
 
 url_login = base_url+'api/v1/db/login/'
@@ -88,21 +88,18 @@ pprint(r.json())
 
 
 
+print("""
 
-def set_path(x):
-    path = x
-    print(json.dumps(x))
+    ** Receive File
 
-
-def get_path():
-    print(json.loads(path))
-
-
-
-# dictionary = {'1': 'amrit'}
-# set_path(dictionary)
-# get_path()
-
-
+""")
+roles_url = base_url + 'api/v1/db/receive_file/6533/'
+data = {
+    "path": "Unsatisfactory Grade Submission",
+    "qr": "6533"
+}
+r = requests.put(roles_url, json=data, headers=headers)
+print(r.status_code)
+pprint(r.json())
 
 

@@ -15,6 +15,7 @@ from .serializers import (
     AddUserSerializer,
     AddRoleSerializer,
     AddFileSerializer,
+    ReceiveFileSerializer,
 )
 from rest_framework import viewsets, mixins, status, generics
 from rest_framework.authentication import TokenAuthentication
@@ -90,20 +91,18 @@ class CreateFile(mixins.CreateModelMixin,
 
 
 
-class recieveFile(generics.UpdateAPIView):
+class RecieveFile(APIView):
     # add to the path.
     authentication_classes = (TokenAuthentication, )
     permission_classes = (IsAuthenticated, )
-    def update(self, request, *args, **kwargs):
-        user_logined = request.user
-        app_user = get_object_or_404(AppUser, user = user_logined)
-        qr = self.serializer.validated_data['qr']
-        role = self.serializer.validated_data['role']
-        department = self.serializer.validated_data['department']
-        path = role+"#"+department+"#"+app_user.user.email
-        file = File.objects.filter(qr=qr)
-        file.update(path=file.path+path+"+")
-        return Response(self.serializer.validated_data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk):
+        saved_article = get_object_or_404(File.objects.all(), qr=pk)
+        serializer = ReceiveFileSerializer(instance=saved_article, data=request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            file_saved = serializer.save()
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
+
 
 
 

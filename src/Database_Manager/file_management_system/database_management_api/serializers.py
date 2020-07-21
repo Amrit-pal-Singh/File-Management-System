@@ -30,3 +30,15 @@ class AddFileSerializer(ModelSerializer):
         model = File
         fields = ('qr', 'name',)
 
+class ReceiveFileSerializer(ModelSerializer):
+    class Meta:
+        model = File
+        fields = ('qr', 'path',)
+
+    def update(self, instance, validated_data):
+        instance.path = validated_data.get('path', instance.path)
+        # instance.description = validated_data.get('description', instance.description)
+        # instance.body = validated_data.get('body', instance.body)
+        # instance.author_id = validated_data.get('author_id', instance.author_id)
+        instance.save()
+        return instance
