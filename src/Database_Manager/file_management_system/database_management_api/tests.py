@@ -69,7 +69,7 @@ roles_url = base_url + 'api/v1/db/add_file/'
 # qr is the qr scanned.
 data = {
     "name": "Unsatisfactory Grade Submission",
-    "qr": "6533"
+    "qr": "6537"
 }
 r = requests.post(roles_url, json=data, headers=headers)
 print(r.status_code)
@@ -93,13 +93,55 @@ print("""
     ** Receive File
 
 """)
-roles_url = base_url + 'api/v1/db/receive_file/6533/'
+roles_url = base_url + 'api/v1/db/receive_file/6537/'
 data = {
-    "path": "Unsatisfactory Grade Submission",
-    "qr": "6533"
+    "email": "amrit@gmail.com",
+    "role": "Director",
+    "department": "",
+    "qr": "6537"
 }
 r = requests.put(roles_url, json=data, headers=headers)
 print(r.status_code)
 pprint(r.json())
+
+
+
+
+print("""
+
+    ** PlanToSend
+
+""")
+roles_url = base_url + 'api/v1/db/planToSend/6537/'
+data = {
+    "role": "Instructor",
+    "department": "CSE",
+    "sender_email": "amrit@gmail.com",
+    "qr": "6537"
+}
+r = requests.put(roles_url, json=data, headers=headers)
+print(r.status_code)
+pprint(r.json())
+
+
+
+
+print("""
+
+    ** ApproveFile
+
+""")
+roles_url = base_url + 'api/v1/db/approve_disapprove_file/6537/'
+data = {
+    "email": "amrit@gmail.com",
+    "role": "Director",
+    "department": "",
+    "approve": 1,
+    "qr": "6537"
+}
+r = requests.put(roles_url, json=data, headers=headers)
+print(r.status_code)
+pprint(r.json())
+
 
 

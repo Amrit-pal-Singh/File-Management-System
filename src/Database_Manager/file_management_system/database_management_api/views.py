@@ -16,6 +16,8 @@ from .serializers import (
     AddRoleSerializer,
     AddFileSerializer,
     ReceiveFileSerializer,
+    ApproveDisapproveSerializer,
+    PlanToSendSerializer,
 )
 from rest_framework import viewsets, mixins, status, generics
 from rest_framework.authentication import TokenAuthentication
@@ -70,22 +72,13 @@ class CreateFile(mixins.CreateModelMixin,
         self.serializer = self.get_serializer(data=request.data)
         self.serializer.is_valid(raise_exception=True)
         qr = self.serializer.validated_data['qr']
-
-        # if(File.objects.filter(qr=qr) is not None):
-        #     print("T^^^^^^^^^^^^^")
-        #     file_object = get_object_or_404(File, qr=qr)
-        #     file_object.restarted = True
-        #     return Response(self, serializer.validated_data, status=status.HTTP_200_OK)
-
         name = self.serializer.validated_data['name']
         user_logined = request.user
-        print("@@@@@@@@@@")
-        print(user_logined.first_name, "#########")
         app_user = get_object_or_404(AppUser, user=user_logined)
         time_generated = datetime.now()
         restarted = False
-        path = "Begin"
-        approved = False
+        path = ""
+        approved = ""
         file = File.objects.create(qr=qr,name=name,user=app_user,time_generated=time_generated,restarted=restarted,path=path,approved=approved)
         return Response(self.serializer.validated_data, status=status.HTTP_201_CREATED)        
 
@@ -97,12 +90,34 @@ class RecieveFile(APIView):
     permission_classes = (IsAuthenticated, )
 
     def put(self, request, pk):
-        saved_article = get_object_or_404(File.objects.all(), qr=pk)
-        serializer = ReceiveFileSerializer(instance=saved_article, data=request.data, partial=True)
+        selected_file = get_object_or_404(File, qr=pk)
+        serializer = ReceiveFileSerializer(instance=selected_file, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
             file_saved = serializer.save()
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
+class ApproveDissaprove(APIView):
+    # add to the path.
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+
+    def put(self, request, pk):
+        selected_file = get_object_or_404(File, qr=pk)
+        serializer = ApproveDisapproveSerializer(instance=selected_file, data=request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            file_saved = serializer.save()
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
+
+
+class PlanToSend(APIView):
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+    def put(self, request, pk):
+        selected_file = get_object_or_404(File, qr=pk)
+        serializer = PlanToSendSerializer(instance=selected_file, data=request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            file_saved = serializer.save()
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 
 
@@ -119,18 +134,19 @@ class ViewMyGeneratedFiles(APIView):
         for file in files:
             dict_files[index] = {'qr': file.qr,
                                 'name':file.name,
+                                'user': file.user.user.email,
                                 'time_generated':str(file.time_generated),
                                 'restarted':file.restarted,
                                 'path':file.path,
-                                'plan_to_send':file.plan_to_send,
-                                'approved':file.approved}    
+                                'plan_to_send':str(file.plan_to_send),
+                                'plan_to_send_generator': str(file.plan_to_send_generator),
+                                'approved':file.approved,
+                                'disapproved': file.disapproved}    
             index += 1
         dict_files_dump = json.dumps(dict_files)
         json_files = json.loads(dict_files_dump)
         return Response(json_files, status=status.HTTP_200_OK)
 
-class ViewMyApprovedDisapprovedFiles():
-    pass
 
 class ListRole(APIView):
     authentication_classes = (TokenAuthentication,)
@@ -152,23 +168,15 @@ class ListRole(APIView):
         return Response(jsonRoles, status=status.HTTP_200_OK)
 
 
-class ApproveFile():
+class ViewMyApprovedDisaaprovedFiles():
     pass
 
-
-class DisApproveFile():
+class ViewFilesApprovedDissaprovedByMe():
     pass
 
-
-class PlanToSend():
-    # plan to send file
+class FileDetail():
     pass
-
 
 class ViewMyPlanToSendFiles():
     pass    
-
-class searchFile():
-    pass
-    # give the id of the file or the name of the file.
 

@@ -12,5 +12,7 @@ urlpatterns = [
     path('login/', views.CustomAuthToken.as_view()),
     path('roles/', views.ListRole.as_view(), name='list_roles'),
     path('generated_files/', views.ViewMyGeneratedFiles.as_view(), name='list_generated_files'),
-    path('receive_file/<slug:pk>/', views.RecieveFile.as_view(), name='receive_file')
+    path('receive_file/<slug:pk>/', views.RecieveFile.as_view(), name='receive_file'),
+    path('approve_disapprove_file/<slug:pk>/', views.ApproveDissaprove.as_view(), name='receive_file'),
+    path('planToSend/<slug:pk>/', views.PlanToSend.as_view(), name='receive_file'),
 ]

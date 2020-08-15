@@ -147,7 +147,9 @@ class File(models.Model):
     restarted = models.BooleanField()
     path = models.CharField(max_length=1000, null=True)
     plan_to_send = models.ForeignKey(Role, on_delete=models.CASCADE,null=True)
-    approved = models.CharField(max_length=1000)
+    plan_to_send_generator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='plan_to_send_generator_person')
+    approved = models.CharField(max_length=1000, default='')
+    disapproved = models.CharField(max_length=1000, default='')
 
     def save(self, *args, **kwargs):
         print(self.path)
@@ -170,9 +172,9 @@ class File(models.Model):
     def get_approved(self):
         return json.loads(self.approved)
 
-    def add_approved():
+    def add_approved(self):
         pass
 
-    def add_path():
+    def add_path(self):
         pass
     
