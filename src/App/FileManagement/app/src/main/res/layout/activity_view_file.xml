@@ -19,25 +19,45 @@
             android:layout_marginHorizontal="80dp"
             android:hint="Search files.."
             android:inputType="textVisiblePassword"/>
+
         <ListView
             android:id = "@+id/myFilesList"
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
             android:layout_margin="16dp"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:layout_marginHorizontal="80dp"
-            android:text="generated file"></Button>
 
         <Button
-            android:layout_width="match_parent"
+            android:id="@+id/generated_files_by_me"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
             android:layout_marginHorizontal="80dp"
-            android:text="approved/disapproved files"></Button>
+            android:text="generated files by me"></Button>
+
+        <Button
+            android:id="@+id/app_disapp_files_by_me"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginHorizontal="80dp"
+            android:text="approved/disapproved files by me"></Button>
+
+        <Button
+            android:id="@+id/my_plan_to_send_files"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginHorizontal="80dp"
+            android:text="my plan to send files"></Button>
+
+        <Button
+            android:id="@+id/app_disapp_files_by_others"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginHorizontal="80dp"
+            android:text=" my files approved/disapproved by others"></Button>
 
     </LinearLayout>
 

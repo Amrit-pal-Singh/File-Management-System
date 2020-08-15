@@ -11,6 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity_view_details_of_a_file"></activity>
+        <activity android:name=".activity_view_files_app_disapp_by_others" />
+        <activity android:name=".activity_view_my_files_plan_to_send" />
+        <activity android:name=".activity_view_app_disapp_files_by_me" />
+        <activity android:name=".activity_view_generated_files_by_me" />
         <activity android:name=".ActivityPlanToSendItem" />
         <activity android:name=".ActivityGenerateFileItem" />
         <activity android:name=".activity_receive_barcode_bp" />
@@ -43,15 +48,15 @@
             android:label="@string/title_activity_main_activity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <dist:module dist:instant="true" />
 
