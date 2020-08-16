@@ -7,20 +7,19 @@
     android:orientation="vertical"
     tools:context=".activity_batch_processing_plan_to_send">
 
-    <TextView
-        android:id="@+id/lst_scan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:text="List of items scanned"></TextView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
         android:gravity="center|bottom"
         android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/listViewPlanToSendBPActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"></ListView>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
