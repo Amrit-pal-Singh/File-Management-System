@@ -4,7 +4,7 @@ This project aims to develop a system that can manage files in various offices w
 
 
 This Project is being developed by a team of students of IIT Ropar : 
-Ripudaman Singh
-Amritpal Singh
-Abhishek Yadav
-Jai Garg
+\n Ripudaman Singh
+\n Amritpal Singh
+\n Abhishek Yadav
+\n Jai Garg
