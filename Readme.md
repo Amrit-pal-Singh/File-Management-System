@@ -7,4 +7,4 @@ This Project is being developed by a team of students of IIT Ropar :
 Ripudaman Singh,
 Amritpal Singh,
 Abhishek Yadav,
-Jai Garg,
+Jai Garg
