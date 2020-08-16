@@ -46,7 +46,7 @@ headers = {'Authorization': f'Token {token}'}
 
 print("""
 
-    ** List All Roles
+    ** List My Roles
 
 """)
 roles_url = base_url+'api/v1/db/roles'
@@ -55,6 +55,21 @@ roles_url = base_url+'api/v1/db/roles'
 r = requests.get(roles_url, headers=headers)
 print(r.status_code)
 pprint(r.json())
+
+
+
+print("""
+
+    ** List All Roles Present
+
+""")
+roles_url = base_url+'api/v1/db/get_all_roles'
+
+# making the get request on above url
+r = requests.get(roles_url, headers=headers)
+print(r.status_code)
+pprint(r.json())
+
 
 
 print("""
@@ -69,7 +84,7 @@ roles_url = base_url + 'api/v1/db/add_file/'
 # qr is the qr scanned.
 data = {
     "name": "Unsatisfactory Grade Submission",
-    "qr": "6537"
+    "qr": "6541"
 }
 r = requests.post(roles_url, json=data, headers=headers)
 print(r.status_code)
@@ -93,12 +108,12 @@ print("""
     ** Receive File
 
 """)
-roles_url = base_url + 'api/v1/db/receive_file/6537/'
+roles_url = base_url + 'api/v1/db/receive_file/6541/'
 data = {
     "email": "amrit@gmail.com",
     "role": "Director",
     "department": "",
-    "qr": "6537"
+    "qr": "6541"
 }
 r = requests.put(roles_url, json=data, headers=headers)
 print(r.status_code)
@@ -112,12 +127,12 @@ print("""
     ** PlanToSend
 
 """)
-roles_url = base_url + 'api/v1/db/planToSend/6537/'
+roles_url = base_url + 'api/v1/db/plan_to_send/6541/'
 data = {
     "role": "Instructor",
     "department": "CSE",
     "sender_email": "amrit@gmail.com",
-    "qr": "6537"
+    "qr": "6541"
 }
 r = requests.put(roles_url, json=data, headers=headers)
 print(r.status_code)
@@ -131,13 +146,13 @@ print("""
     ** ApproveFile
 
 """)
-roles_url = base_url + 'api/v1/db/approve_disapprove_file/6537/'
+roles_url = base_url + 'api/v1/db/approve_disapprove_file/6541/'
 data = {
     "email": "amrit@gmail.com",
     "role": "Director",
     "department": "",
     "approve": 1,
-    "qr": "6537"
+    "qr": "6541"
 }
 r = requests.put(roles_url, json=data, headers=headers)
 print(r.status_code)

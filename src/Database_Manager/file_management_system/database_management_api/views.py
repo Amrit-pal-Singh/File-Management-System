@@ -167,6 +167,19 @@ class ListRole(APIView):
         
         return Response(jsonRoles, status=status.HTTP_200_OK)
 
+class GetAllRoles(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    def get(self, request, *args, **kwargs):
+        roles_dict = {}     
+        index = 0   
+        for i in Role.objects.all():
+            roles_dict[index] = {'name': i.name, 'department': i.department} 
+            index += 1
+        dictRolesDump = json.dumps(roles_dict)
+        jsonRoles = json.loads(dictRolesDump)
+        
+        return Response(jsonRoles, status=status.HTTP_200_OK)
 
 class ViewMyApprovedDisaaprovedFiles():
     pass
