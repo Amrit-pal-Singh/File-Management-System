@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +21,10 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class activity_approve_disapprove_barcode_bp extends AppCompatActivity {
 
@@ -30,17 +35,33 @@ public class activity_approve_disapprove_barcode_bp extends AppCompatActivity {
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     String intentData = "";
+    ListView listView;
+    private ArrayList<String> scannedData;
+    ArrayAdapter<String> adapter;
+    FloatingActionButton fabPlanToSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approve_disapprove_barcode_bp);
+        scannedData = new ArrayList<>();
         initViews();
+        listView = findViewById(R.id.listViewPlanToSendBP);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, scannedData);
+        listView.setAdapter(adapter);
+        fabPlanToSend = findViewById(R.id.fabPlanToSendBP);
+        fabPlanToSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), activity_batch_processing_approve_disapprove.class).putExtra("BarcodeData", scannedData));
+
+            }
+        });
     }
 
     private void initViews() {
-        txtBarcodeValue = findViewById(R.id.txtBarcodeValueA);
-        surfaceView = findViewById(R.id.surfaceViewA);
+//        txtBarcodeValue = findViewById(R.id.txtBarcodeValue);
+        surfaceView = findViewById(R.id.surfaceView);
     }
 
     private void initialiseDetectorsAndSources() {
@@ -91,11 +112,18 @@ public class activity_approve_disapprove_barcode_bp extends AppCompatActivity {
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if (barcodes.size() != 0) {
-                    txtBarcodeValue.post(new Runnable() {
+                    runOnUiThread(new Runnable() {
+
                         @Override
                         public void run() {
+
                             intentData = barcodes.valueAt(0).displayValue;
-                            startActivity(new Intent(getApplicationContext(), activity_batch_processing_approve_disapprove.class).putExtra("BarcodeData", intentData));
+                            txtBarcodeValue = findViewById(R.id.txtBarcodeValue);
+                            txtBarcodeValue.setText(intentData);
+                            if(scannedData.indexOf(intentData) == -1) {
+                                scannedData.add(intentData);
+                                adapter.notifyDataSetChanged();
+                            }
                         }
                     });
                 }
