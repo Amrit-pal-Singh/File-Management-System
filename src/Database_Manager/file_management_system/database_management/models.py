@@ -147,7 +147,7 @@ class File(models.Model):
     restarted = models.BooleanField()
     path = models.CharField(max_length=1000, null=True)
     plan_to_send = models.ForeignKey(Role, on_delete=models.CASCADE,null=True)
-    plan_to_send_generator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='plan_to_send_generator_person')
+    plan_to_send_generator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='plan_to_send_generator')
     approved = models.CharField(max_length=1000, default='')
     disapproved = models.CharField(max_length=1000, default='')
 

@@ -49,6 +49,9 @@ class ReceiveFileSerializer(ModelSerializer):
         path += ','
         path += validated_data.get('department')
         instance.path = path
+        instance.plan_to_send = None
+        instance.plan_to_send_generator = None
+
         # instance.description = validated_data.get('description', instance.description)
         # instance.body = validated_data.get('body', instance.body)
         # instance.author_id = validated_data.get('author_id', instance.author_id)
@@ -77,6 +80,8 @@ class ApproveDisapproveSerializer(ModelSerializer):
         path += validated_data.get('department') 
         instance.path = original_path + path
         instance.restarted = False
+        instance.plan_to_send = None
+        instance.plan_to_send_generator = None
         if(approved):
             instance.approved += path
         else:
