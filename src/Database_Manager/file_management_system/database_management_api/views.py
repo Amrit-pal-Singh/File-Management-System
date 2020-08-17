@@ -181,15 +181,81 @@ class GetAllRoles(APIView):
         
         return Response(jsonRoles, status=status.HTTP_200_OK)
 
-class ViewMyApprovedDisaaprovedFiles():
-    pass
+class ViewMyApprovedDisaaprovedFiles(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    def get(self, request, *args, **kwargs):
+        user_logined = request.user
+        app_user = get_object_or_404(AppUser, user=user_logined)
+        files = File.objects.all().filter(user=app_user)        
+        print(files)
+        dict_files = {}
+        index = 0
+        for file in files:
+            if((len(file.approved) > 0 or len(file.disapproved) > 0) and file.restarted == False):
+                dict_files[index] = {'qr': file.qr,
+                                    'name':file.name,
+                                    'user': file.user.user.email,
+                                    'time_generated':str(file.time_generated),
+                                    'restarted':file.restarted,
+                                    'path':file.path,
+                                    'plan_to_send':str(file.plan_to_send),
+                                    'plan_to_send_generator': str(file.plan_to_send_generator),
+                                    'approved':file.approved,
+                                    'disapproved': file.disapproved}    
+                index += 1
+        dict_files_dump = json.dumps(dict_files)
+        json_files = json.loads(dict_files_dump)
+        return Response(json_files, status=status.HTTP_200_OK)
+
 
 class ViewFilesApprovedDissaprovedByMe():
     pass
 
-class FileDetail():
-    pass
+class FileDetail(APIView):
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
 
-class ViewMyPlanToSendFiles():
-    pass    
+    def get(self, request, pk, *args, **kwargs):
+        file = get_object_or_404(File, qr=pk)
+        dict_files = {
+            'qr': file.qr,
+            'name':file.name,
+            'user': file.user.user.email,
+            'time_generated':str(file.time_generated),
+            'restarted':file.restarted,
+            'path':file.path,
+            'plan_to_send':str(file.plan_to_send),
+            'plan_to_send_generator': str(file.plan_to_send_generator),
+            'approved':file.approved,
+            'disapproved': file.disapproved}
+        dict_files_dump = json.dumps(dict_files)
+        json_files = json.loads(dict_files_dump)
+        return Response(json_files, status=status.HTTP_200_OK)
+
+
+class ViewMyPlanToSendFiles(APIView):
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+    def get(self, request, *args, **kwargs):
+        user_logined = request.user
+        files = File.objects.all().filter(plan_to_send_generator=user_logined)        
+        dict_files = {}
+        index = 0
+        for file in files:
+            dict_files[index] = {'qr': file.qr,
+                                'name':file.name,
+                                'user': file.user.user.email,
+                                'time_generated':str(file.time_generated),
+                                'restarted':file.restarted,
+                                'path':file.path,
+                                'plan_to_send':str(file.plan_to_send),
+                                'plan_to_send_generator': str(file.plan_to_send_generator),
+                                'approved':file.approved,
+                                'disapproved': file.disapproved}    
+            sindex += 1
+        dict_files_dump = json.dumps(dict_files)
+        json_files = json.loads(dict_files_dump)
+        return Response(json_files, status=status.HTTP_200_OK)
+
 

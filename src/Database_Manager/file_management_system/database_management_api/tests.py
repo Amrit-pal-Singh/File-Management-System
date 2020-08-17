@@ -84,7 +84,7 @@ roles_url = base_url + 'api/v1/db/add_file/'
 # qr is the qr scanned.
 data = {
     "name": "Unsatisfactory Grade Submission",
-    "qr": "6541"
+    "qr": "6549"
 }
 r = requests.post(roles_url, json=data, headers=headers)
 print(r.status_code)
@@ -108,12 +108,12 @@ print("""
     ** Receive File
 
 """)
-roles_url = base_url + 'api/v1/db/receive_file/6541/'
+roles_url = base_url + 'api/v1/db/receive_file/6549/'
 data = {
     "email": "amrit@gmail.com",
     "role": "Director",
     "department": "",
-    "qr": "6541"
+    "qr": "6549"
 }
 r = requests.put(roles_url, json=data, headers=headers)
 print(r.status_code)
@@ -127,12 +127,12 @@ print("""
     ** PlanToSend
 
 """)
-roles_url = base_url + 'api/v1/db/plan_to_send/6541/'
+roles_url = base_url + 'api/v1/db/plan_to_send/6549/'
 data = {
     "role": "Instructor",
     "department": "CSE",
     "sender_email": "amrit@gmail.com",
-    "qr": "6541"
+    "qr": "6549"
 }
 r = requests.put(roles_url, json=data, headers=headers)
 print(r.status_code)
@@ -146,17 +146,57 @@ print("""
     ** ApproveFile
 
 """)
-roles_url = base_url + 'api/v1/db/approve_disapprove_file/6541/'
+roles_url = base_url + 'api/v1/db/approve_disapprove_file/6549/'
 data = {
     "email": "amrit@gmail.com",
     "role": "Director",
     "department": "",
     "approve": 1,
-    "qr": "6541"
+    "qr": "6549"
 }
 r = requests.put(roles_url, json=data, headers=headers)
 print(r.status_code)
 pprint(r.json())
 
 
+
+
+print("""
+
+    ** view_my_plan_to_send_files
+
+""")
+roles_url = base_url + 'api/v1/db/view_my_plan_to_send_files/'
+r = requests.get(roles_url, headers=headers)
+print(r.status_code)
+pprint(r.json())
+
+
+
+
+
+print("""
+
+    ** file_detail
+
+""")
+roles_url = base_url + 'api/v1/db/file_detail/6549/'
+r = requests.get(roles_url, headers=headers)
+print(r.status_code)
+pprint(r.json())
+
+
+
+
+
+
+print("""
+
+    ** view_my_approved_disaaproved_files
+
+""")
+roles_url = base_url + 'api/v1/db/view_my_approved_disaaproved_files/'
+r = requests.get(roles_url, headers=headers)
+print(r.status_code)
+pprint(r.json())
 

@@ -1,16 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_view_details_of_a_file">
+    tools:context=".activity_view_details_of_a_file"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/fileDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Details of a particular file"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="27dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginBottom="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fileDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Details of the file"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="QR: "/>
+
+                    <TextView
+                        android:id="@+id/qr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="qr"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name: "/>
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="name"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User: "/>
+
+                    <TextView
+                        android:id="@+id/user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="user"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Time of generation: "/>
+
+                    <TextView
+                        android:id="@+id/time_generated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="time"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Restarted: "/>
+
+                    <TextView
+                        android:id="@+id/restarted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="restarted"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Path: "/>
+
+                    <TextView
+                        android:id="@+id/path"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="path"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Plan to Send: "/>
+
+                    <TextView
+                        android:id="@+id/plan_to_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="none"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Plan to Send Generator: "/>
+
+                    <TextView
+                        android:id="@+id/plan_to_send_generator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="none"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Approved: "/>
+
+                    <TextView
+                        android:id="@+id/approved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="none"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Disapproved: "/>
+
+                    <TextView
+                        android:id="@+id/disapproved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="disapproved"/>
+
+                </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
