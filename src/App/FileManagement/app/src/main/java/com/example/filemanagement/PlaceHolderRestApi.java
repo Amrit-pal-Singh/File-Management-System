@@ -9,6 +9,8 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface PlaceHolderRestApi {
 
@@ -47,8 +49,13 @@ public interface PlaceHolderRestApi {
     @GET("api/v1/db/generated_files/")
     Call<JsonObject> getFiles(@Header("Authorization") String userToken);
 
-    @GET("api/v1/db/receive_files/6549/")
-    Call<JsonObject> receiveFiles(@Header("Authorization") String userToken);
+    @PUT("api/v1/db/receive_files/{qr}/")
+    Call<JsonObject> receiveFiles(@Header("Authorization") String userToken,
+                                  @Path("qr") String qr_code,
+                                  @Body JsonObject jsonObject);
+//
+//    @PUT("api/v1/db/receive_files/6549/")
+//    Call<JsonObject> receiveFiles(@Header("Authorization") String userToken);
 
     @GET("api/v1/db/file_detail/<qr>/")
     Call<JsonObject> getFileDetails(@Header("Authorization") String userToken);

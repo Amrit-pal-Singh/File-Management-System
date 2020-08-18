@@ -31,19 +31,24 @@ public class ReceiveItemActivity extends AppCompatActivity {
 
             // Send data to api
             findViewById(R.id.receive_file_btn).setOnClickListener(v -> {
-                addFile(barcode_data);
+                receiveFile(barcode_data);
             });
         }
     }
 
-    private void addFile(String barcode_data){
+    private void receiveFile(String barcode_data){
+
+        barcode_data = "6549";
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("qr", barcode_data);
+        jsonObject.addProperty("role", "Instructor");
+        jsonObject.addProperty("department", "CSE");
+        jsonObject.addProperty("sender_email", "amrit@gmail.com");
 
         Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
-        Call<JsonObject> call = PlaceHolderRestApi.restApi.addFile(LoginActivity.TOKEN, jsonObject);
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.receiveFiles(LoginActivity.TOKEN, barcode_data, jsonObject);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
