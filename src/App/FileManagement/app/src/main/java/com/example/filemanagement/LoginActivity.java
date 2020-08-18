@@ -61,8 +61,6 @@ public class LoginActivity extends AppCompatActivity {
 
         remove_this_var_later++;
 
-        Toast.makeText(getApplicationContext(), "Trying to Login", Toast.LENGTH_LONG).show();
-
         EditText mEmail = findViewById(R.id.editTextEmail);
         EditText mPassword = findViewById(R.id.editTextPassword);
 
@@ -74,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
             email = "jai69@gmail.com";
             password = "new_pass_123";
         }
+
+        Toast.makeText(getApplicationContext(), "Trying to Login", Toast.LENGTH_LONG).show();
 
         LoginCredentials loginCredentials = new LoginCredentials(email, password);
 
@@ -92,9 +92,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     String content = "Welcome ";
 //                    content += "Code: " + response.code() + "\n";
-//                    content += "Token: " + loginCredentials.getToken() + "\n";
 //                    content += "Email: " + loginCredentials.getEmail() + "\n";
-                    content += "Full Name: " + loginCredentials.getFirst_name() + " "
+                    content += loginCredentials.getFirst_name() + " "
                             + loginCredentials.getLast_name() + "\n";
 
                     Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();

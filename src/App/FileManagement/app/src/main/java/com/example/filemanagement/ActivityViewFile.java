@@ -24,7 +24,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ActivityViewFile extends AppCompatActivity {
-    Button b1,b2,b3,b4;
+    Button b1, b2, b3, b4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,13 +67,12 @@ public class ActivityViewFile extends AppCompatActivity {
         });
 
 
-
         getFilesFun();
 
     }
 
 
-    private void getFilesFun(){
+    private void getFilesFun() {
         final ListView list = findViewById(R.id.myFilesList);
 
         ArrayList<String> arrayList = new ArrayList<>();
@@ -85,7 +85,7 @@ public class ActivityViewFile extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
 
                     Toast.makeText(getApplicationContext(), "Unsuccessful: " + response.code(), Toast.LENGTH_LONG).show();
                     return;
@@ -93,38 +93,39 @@ public class ActivityViewFile extends AppCompatActivity {
 
                 JsonObject jsonObject = response.body();
 
-                for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){
+                for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
                     JsonObject jsonFile = entry.getValue().getAsJsonObject();
                     StringBuilder file = new StringBuilder();
                     try {
-                        file.append(jsonFile.get("qr").toString()).append(" | ");
-                        file.append(jsonFile.get("name").toString()).append(" | ");
-                        //file.append(jsonFile.get("time_generated").toString()).append(" | ");
-                        //file.append(jsonFile.get("restarted").toString()).append(" | ");
-                        //file.append(jsonFile.get("path").toString()).append(" | ");
-                        //file.append(jsonFile.get("plan_to_send").toString()).append(" | ");
-                        // file.append(jsonFile.get("approved").toString()).append(" | ");
+                        file.append(jsonFile.get("qr").getAsString()).append(" | ");
+                        file.append(jsonFile.get("name").getAsString());
+                        //file.append(jsonFile.get("time_generated").getAsString()).append(" | ");
+                        //file.append(jsonFile.get("restarted").getAsString()).append(" | ");
+                        //file.append(jsonFile.get("path").getAsString()).append(" | ");
+                        //file.append(jsonFile.get("plan_to_send").getAsString()).append(" | ");
+                        // file.append(jsonFile.get("approved").getAsString()).append(" | ");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-                    arrayList.add(file.toString().replaceAll("\"", ""));
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ActivityViewFile.this,
-                            android.R.layout.simple_list_item_1, arrayList);
-
-                    list.setAdapter(arrayAdapter);
-
-                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String clickedItem=(String) list.getItemAtPosition(position);
-                            String intentData = jsonFile.get("qr").toString();
-                            startActivity(new Intent(getApplicationContext(), activity_view_details_of_a_file.class).putExtra("QrValue", intentData));
-                            //Toast.makeText(ActivityViewFile.this,clickedItem,Toast.LENGTH_LONG).show();
-                        }
-                    });
-
+                    arrayList.add(file.toString());
                 }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ActivityViewFile.this,
+                        android.R.layout.simple_list_item_1, arrayList);
+
+                list.setAdapter(arrayAdapter);
+
+                list.setOnItemClickListener((parent, view, position, id) -> {
+                    String clickedItem = (String) list.getItemAtPosition(position);
+                    String[] strList = clickedItem.split("\\|");
+                    String intentData = strList[0].trim();
+
+                    startActivity(new Intent(getApplicationContext(),
+                            activity_view_details_of_a_file.class)
+                            .putExtra("qr_data", intentData));
+                    //Toast.makeText(ActivityViewFile.this,clickedItem,Toast.LENGTH_LONG).show();
+                });
 
                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
             }

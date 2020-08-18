@@ -1,6 +1,7 @@
 package com.example.filemanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,25 +24,25 @@ import java.util.Map;
 
 public class activity_view_details_of_a_file extends AppCompatActivity {
     private PlaceHolderRestApi placeHolderRestApi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_details_of_a_file);
 
-        String qr_data = getIntent().getStringExtra("QrValue");
+        String qr_data = getIntent().getStringExtra("qr_data");
 
         getFileDetailsFun(qr_data);
     }
 
-    private void getFileDetailsFun(String qr_data){
-        //Token for Jai: "Token a177092974d276852aa8c638cf6823e0f1a89972"
+    private void getFileDetailsFun(String qr_data) {
 
-        Call<JsonObject> call = PlaceHolderRestApi.restApi.getFileDetails(LoginActivity.TOKEN, "6549");
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.getFileDetails(LoginActivity.TOKEN, qr_data);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
 
                     Toast.makeText(getApplicationContext(), "Unsuccessful: " + response.code(), Toast.LENGTH_LONG).show();
                     return;
@@ -49,59 +50,39 @@ public class activity_view_details_of_a_file extends AppCompatActivity {
 
                 JsonObject jsonObject = response.body();
 
-                for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){
-                    JsonObject jsonFile = entry.getValue().getAsJsonObject();
-                    String qr="", name="", user="", time="", restarted="", path="", plan_to_send="", plan_to_send_gen="", app="", disapp="";
-                    try {
-                        qr += jsonFile.get("qr").toString();
-                        name += jsonFile.get("name").toString();
-                        user += jsonFile.get("user").toString();
-                        time += jsonFile.get("time_generated").toString();
-                        restarted += jsonFile.get("restarted").toString();
-                        path += jsonFile.get("path").toString();
-                        plan_to_send += jsonFile.get("plan_to_send").toString();
-                        plan_to_send_gen += jsonFile.get("plan_to_send_generator").toString();
-                        app += jsonFile.get("approved").toString();
-                        disapp += jsonFile.get("disapproved").toString();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                TextView tvQR = findViewById(R.id.qr);
+                tvQR.setText(jsonObject.get("qr").getAsString());
 
-                    path.toString().replaceAll("#", "->");
-                    app.toString().replaceAll("#", "->");
-                    disapp.toString().replaceAll("#", "->");
+                TextView tvName = findViewById(R.id.name);
+                tvName.setText(jsonObject.get("name").getAsString());
 
-                    TextView tvQR = (TextView) findViewById(R.id.qr);
-                    tvQR.setText(qr);
+                TextView tvUser = findViewById(R.id.user);
+                tvUser.setText(jsonObject.get("user").getAsString());
 
-                    TextView tvName = (TextView) findViewById(R.id.name);
-                    tvName.setText(name);
+                TextView tvTime = findViewById(R.id.time_generated);
+                tvTime.setText(jsonObject.get("time_generated").getAsString());
 
-                    TextView tvUser = (TextView) findViewById(R.id.user);
-                    tvUser.setText(user);
+                TextView tvRestarted = findViewById(R.id.restarted);
+                tvRestarted.setText(jsonObject.get("restarted").getAsString());
 
-                    TextView tvTime = (TextView) findViewById(R.id.time_generated);
-                    tvTime.setText(time);
+                TextView tvPath = findViewById(R.id.path);
+                tvPath.setText(jsonObject.get("path").getAsString()
+                        .replaceAll("#", "->"));
 
-                    TextView tvRestarted = (TextView) findViewById(R.id.restarted);
-                    tvRestarted.setText(restarted);
+                TextView tvPtS = findViewById(R.id.plan_to_send);
+                tvPtS.setText(jsonObject.get("plan_to_send").getAsString());
 
-                    TextView tvPath = (TextView) findViewById(R.id.path);
-                    tvPath.setText(path);
+                TextView tvPtSG = findViewById(R.id.plan_to_send_generator);
+                tvPtSG.setText(jsonObject.get("plan_to_send_generator").getAsString());
 
-                    TextView tvPtS = (TextView) findViewById(R.id.plan_to_send);
-                    tvPtS.setText(plan_to_send);
+                TextView tvApp = findViewById(R.id.approved);
+                tvApp.setText(jsonObject.get("approved").getAsString()
+                        .replaceAll("#", "->"));
 
-                    TextView tvPtSG = (TextView) findViewById(R.id.plan_to_send_generator);
-                    tvPtSG.setText(plan_to_send_gen);
+                TextView tvDisApp = findViewById(R.id.disapproved);
+                tvDisApp.setText(jsonObject.get("disapproved").getAsString().
+                        replaceAll("#", "->"));
 
-                    TextView tvApp = (TextView) findViewById(R.id.approved);
-                    tvApp.setText(app);
-
-                    TextView tvDisApp = (TextView) findViewById(R.id.disapproved);
-                    tvDisApp.setText(disapp);
-
-                }
 
                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
             }
