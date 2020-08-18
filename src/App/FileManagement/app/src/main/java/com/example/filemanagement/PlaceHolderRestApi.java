@@ -68,10 +68,18 @@ public interface PlaceHolderRestApi {
                                  @Path("qr") String qr_code,
                                  @Body JsonObject jsonObject);
 
+    /** view_my_plan_to_send_files */
+    @GET("api/v1/db/view_my_plan_to_send_files/")
+    Call<JsonObject> viewPlanToSendFiles(@Header("Authorization") String userToken);
+
+    /** file_detail */
     @GET("api/v1/db/file_detail/{qr}/")
     Call<JsonObject> getFileDetails(@Header("Authorization") String userToken,
                                     @Path("qr") String qr_code);
 
+    /** view_my_approved_disapproved_files */
+    @GET("api/v1/db/view_my_approved_disaaproved_files/")
+    Call<JsonObject> viewApproveDisapprovedFiles(@Header("Authorization") String userToken);
 
 
 }

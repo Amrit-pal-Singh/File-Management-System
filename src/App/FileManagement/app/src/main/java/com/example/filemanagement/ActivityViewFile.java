@@ -30,40 +30,28 @@ public class ActivityViewFile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_file);
-        b1 = (Button) findViewById(R.id.generated_files_by_me);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), activity_view_generated_files_by_me.class);
-                startActivity(intent);
-            }
+        b1 = findViewById(R.id.generated_files_by_me);
+        b1.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), activity_view_generated_files_by_me.class);
+            startActivity(intent);
         });
 
-        b2 = (Button) findViewById(R.id.app_disapp_files_by_me);
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), activity_view_app_disapp_files_by_me.class);
-                startActivity(intent);
-            }
+        b2 = findViewById(R.id.app_disapp_files_by_me);
+        b2.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), activity_view_app_disapp_files_by_me.class);
+            startActivity(intent);
         });
 
-        b3 = (Button) findViewById(R.id.my_plan_to_send_files);
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), activity_view_my_files_plan_to_send.class);
-                startActivity(intent);
-            }
+        b3 = findViewById(R.id.my_plan_to_send_files);
+        b3.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), activity_view_my_files_plan_to_send.class);
+            startActivity(intent);
         });
 
-        b4 = (Button) findViewById(R.id.app_disapp_files_by_others);
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), activity_view_files_app_disapp_by_others.class);
-                startActivity(intent);
-            }
+        b4 = findViewById(R.id.app_disapp_files_by_others);
+        b4.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), activity_view_files_app_disapp_by_others.class);
+            startActivity(intent);
         });
 
 
@@ -77,8 +65,6 @@ public class ActivityViewFile extends AppCompatActivity {
 
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Demo File 1");
-
-        //Token for Jai: "Token a177092974d276852aa8c638cf6823e0f1a89972"
 
         Call<JsonObject> call = PlaceHolderRestApi.restApi.getFiles(LoginActivity.TOKEN);
 

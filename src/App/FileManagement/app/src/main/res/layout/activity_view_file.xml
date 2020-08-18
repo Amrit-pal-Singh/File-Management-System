@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
             android:layout_marginHorizontal="80dp"
-            android:text="generated files by me"></Button>
+            android:text="generated files by me"/>
 
         <Button
             android:id="@+id/app_disapp_files_by_me"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
             android:layout_marginHorizontal="80dp"
-            android:text="approved/disapproved files by me"></Button>
+            android:text="approved/disapproved files by me"/>
 
         <Button
             android:id="@+id/my_plan_to_send_files"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
             android:layout_marginHorizontal="80dp"
-            android:text="my plan to send files"></Button>
+            android:text="my plan to send files"/>
 
         <Button
             android:id="@+id/app_disapp_files_by_others"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
             android:layout_marginHorizontal="80dp"
-            android:text=" my files approved/disapproved by others"></Button>
+            android:text=" my files approved/disapproved by others"/>
 
     </LinearLayout>
 
