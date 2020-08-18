@@ -51,24 +51,16 @@
             android:prompt="@string/spinner_prompt_home"
             android:spinnerMode="dropdown"></Spinner>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:paddingBottom="250dp"
-        android:orientation="vertical"
-        android:gravity="bottom|center"
-        android:layout_weight="1">
 
-        <Button
-            android:id="@+id/viewFiles_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#170"
-            android:text="View Files"
-            android:textColor="@color/whiteTextColor"
-            android:textSize="20dp">
+    <Button
+        android:id="@+id/viewFiles_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#170"
+        android:text="View Files"
+        android:layout_gravity="center"
+        android:textColor="@color/whiteTextColor"
+        android:textSize="20dp">
 
-        </Button>
-
-    </LinearLayout>
+    </Button>
 </LinearLayout>
