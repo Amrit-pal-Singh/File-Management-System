@@ -23,6 +23,14 @@
         android:gravity="center|bottom"
         android:paddingBottom="60dp"
         android:orientation="vertical" >
+
+        <Spinner
+            android:id="@+id/spinnerPlanToSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"></Spinner>
+
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

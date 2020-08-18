@@ -1,10 +1,14 @@
 package com.example.filemanagement;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class ActivityPlanToSendItem extends AppCompatActivity {
 
@@ -17,6 +21,11 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
         if(getIntent().getStringExtra("BarcodeData") != null) {
             text.setText(getIntent().getStringExtra("BarcodeData"));
         }
+
+        ArrayList<String> roles = new ArrayList<>();
+        Spinner spinner = findViewById(R.id.spinnerPlanToSend);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, roles);
+        spinner.setAdapter(spinnerAdapter);
     }
     private class PlanToSendBackgroundTask extends AsyncTask<String, String, String> {
 
