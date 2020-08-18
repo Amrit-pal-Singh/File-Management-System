@@ -54,32 +54,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void Login(View View) {
-        Toast.makeText(getApplicationContext(), "Trying to Login", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Trying to Login", Toast.LENGTH_LONG).show();
 
         EditText mEmail = findViewById(R.id.editTextEmail);
         EditText mPassword = findViewById(R.id.editTextPassword);
-
-        apiLogin(mEmail.getText().toString(), mPassword.getText().toString());
-
-
-//        if(TOKEN != null){
-//            startActivity(new Intent(this, FrontPageActivity.class));
-//        }
-
-        if(TOKEN == null || TOKEN.equals("Login_Unsuccessful") || TOKEN.equals("Login_Failed")){
-            Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show();
-            remove_it_later++;
-        }
-        else {
-            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, FrontPageActivity.class));
-        }
-        if(remove_it_later > 2){
-            startActivity(new Intent(this, FrontPageActivity.class));
-        }
-    }
-
-    private void apiLogin(String email, String password){
+        
+        String email = mEmail.getText().toString();
+        String password = mPassword.getText().toString();
 
         //Default login credentials for testing
         if(email.equals("")){
@@ -110,6 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                             + loginCredentials.getLast_name() + "\n";
 
                     Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
+
+                    startActivity(new Intent(getApplicationContext(), FrontPageActivity.class));
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Unsuccessful: " + response.code(), Toast.LENGTH_LONG).show();
@@ -123,5 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+
     }
+
 }

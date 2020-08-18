@@ -33,7 +33,7 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
 
             findViewById(R.id.plan_to_send_btn).setOnClickListener(v -> {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("qr", qr_data);
+                jsonObject.addProperty("qr", "6549");
                 jsonObject.addProperty("role", "Instructor");
                 jsonObject.addProperty("department", "CSE");
                 jsonObject.addProperty("sender_email", "amrit@gmail.com");
@@ -56,7 +56,7 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
-        Call<JsonObject> call = PlaceHolderRestApi.restApi.receiveFile(
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.planToSend(
                 LoginActivity.TOKEN,
                 jsonObject.get("qr").getAsString(),
                 jsonObject);
