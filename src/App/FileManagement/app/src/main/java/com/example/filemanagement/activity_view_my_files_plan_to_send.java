@@ -25,11 +25,11 @@ public class activity_view_my_files_plan_to_send extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_my_files_plan_to_send);
 
-        viewMyFiles();
+        viewMyPlantToSendFiles();
 
     }
 
-    private void viewMyFiles(){
+    private void viewMyPlantToSendFiles(){
 
         final ListView list = findViewById(R.id.my_files_plan_to_send_list);
 
