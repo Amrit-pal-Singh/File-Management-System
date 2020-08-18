@@ -1,5 +1,9 @@
 package com.example.filemanagement;
 
+import android.app.Application;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.annotations.SerializedName;
 
 public class LoginCredentials {
@@ -14,7 +18,7 @@ public class LoginCredentials {
     private String token;
 
     @SerializedName("email")
-    private String email;
+    private static String email;
 
     @SerializedName("admin_permissions")
     private Boolean admin_permissions = false;
@@ -37,7 +41,7 @@ public class LoginCredentials {
         return token;
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 

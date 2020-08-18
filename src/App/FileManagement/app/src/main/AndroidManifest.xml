@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity_view_details_of_a_file"></activity>
+        <activity android:name=".activity_view_details_of_a_file"/>
         <activity android:name=".activity_view_files_app_disapp_by_others" />
         <activity android:name=".activity_view_my_files_plan_to_send" />
         <activity android:name=".activity_view_app_disapp_files_by_me" />

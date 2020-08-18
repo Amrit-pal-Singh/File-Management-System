@@ -46,23 +46,32 @@ public interface PlaceHolderRestApi {
     @POST("api/v1/db/add_file/")
     Call<JsonObject> addFile(@Header("Authorization") String userToken, @Body JsonObject jsonObject);
 
+    /** List Files */
     @GET("api/v1/db/generated_files/")
     Call<JsonObject> getFiles(@Header("Authorization") String userToken);
 
+    /** Receive File */
     @PUT("api/v1/db/receive_file/{qr}/")
     Call<JsonObject> receiveFile(@Header("Authorization") String userToken,
                                   @Path("qr") String qr_code,
                                   @Body JsonObject jsonObject);
 
+    /** PlanToSend */
+    @PUT("api/v1/db/plan_to_send/{qr}/")
+    Call<JsonObject> planToSend(@Header("Authorization") String userToken,
+                                @Path("qr") String qr_code,
+                                @Body JsonObject jsonObject);
+
+    /** ApproveFile */
+    @PUT("api/v1/db/approve_disapprove_file/{qr}/")
+    Call<JsonObject> approveFile(@Header("Authorization") String userToken,
+                                 @Path("qr") String qr_code,
+                                 @Body JsonObject jsonObject);
 
     @GET("api/v1/db/file_detail/{qr}/")
     Call<JsonObject> getFileDetails(@Header("Authorization") String userToken,
                                     @Path("qr") String qr_code);
 
 
-    @PUT("api/v1/db/plan_to_send/{qr}/")
-    Call<JsonObject> planToSend(@Header("Authorization") String userToken,
-                                @Path("qr") String qr_code,
-                                @Body JsonObject jsonObject);
 
 }

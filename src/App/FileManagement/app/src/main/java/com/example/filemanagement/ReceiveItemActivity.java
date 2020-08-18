@@ -72,7 +72,7 @@ public class ReceiveItemActivity extends AppCompatActivity {
                 Toast.makeText(context, jsonObject.toString(), Toast.LENGTH_LONG).show();
 
                 for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){
-                    Toast.makeText(context, entry.getValue().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, entry.getValue().getAsString(), Toast.LENGTH_LONG).show();
                 }
 
             }
