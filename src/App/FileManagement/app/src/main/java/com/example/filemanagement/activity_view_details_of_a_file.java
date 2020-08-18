@@ -28,15 +28,15 @@ public class activity_view_details_of_a_file extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_details_of_a_file);
 
-        String QrValue = getIntent().getStringExtra("QrValue");
+        String qr_data = getIntent().getStringExtra("QrValue");
 
-        getFileDetailsFun();
+        getFileDetailsFun(qr_data);
     }
 
-    private void getFileDetailsFun(){
+    private void getFileDetailsFun(String qr_data){
         //Token for Jai: "Token a177092974d276852aa8c638cf6823e0f1a89972"
 
-        Call<JsonObject> call = PlaceHolderRestApi.restApi.getFileDetails(LoginActivity.TOKEN);
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.getFileDetails(LoginActivity.TOKEN, "6549");
 
         call.enqueue(new Callback<JsonObject>() {
             @Override

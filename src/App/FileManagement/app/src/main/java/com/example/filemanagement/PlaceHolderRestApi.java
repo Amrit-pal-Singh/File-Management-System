@@ -40,11 +40,11 @@ public interface PlaceHolderRestApi {
     @POST("api/v1/db/login/")
     Call<LoginCredentials> apiLogin(@Body LoginCredentials loginCredentials);
 
-    @POST("api/v1/db/add_file/")
-    Call<JsonObject> addFile(@Header("Authorization") String userToken, @Body JsonObject jsonObject);
-
     @GET("api/v1/db/roles/")
     Call<JsonObject> getRoles(@Header("Authorization") String userToken);
+
+    @POST("api/v1/db/add_file/")
+    Call<JsonObject> addFile(@Header("Authorization") String userToken, @Body JsonObject jsonObject);
 
     @GET("api/v1/db/generated_files/")
     Call<JsonObject> getFiles(@Header("Authorization") String userToken);
@@ -53,11 +53,16 @@ public interface PlaceHolderRestApi {
     Call<JsonObject> receiveFile(@Header("Authorization") String userToken,
                                   @Path("qr") String qr_code,
                                   @Body JsonObject jsonObject);
-//
-//    @PUT("api/v1/db/receive_files/6549/")
-//    Call<JsonObject> receiveFiles(@Header("Authorization") String userToken);
 
-    @GET("api/v1/db/file_detail/<qr>/")
-    Call<JsonObject> getFileDetails(@Header("Authorization") String userToken);
+
+    @GET("api/v1/db/file_detail/{qr}/")
+    Call<JsonObject> getFileDetails(@Header("Authorization") String userToken,
+                                    @Path("qr") String qr_code);
+
+
+    @PUT("api/v1/db/plan_to_send/{qr}/")
+    Call<JsonObject> planToSend(@Header("Authorization") String userToken,
+                                @Path("qr") String qr_code,
+                                @Body JsonObject jsonObject);
 
 }

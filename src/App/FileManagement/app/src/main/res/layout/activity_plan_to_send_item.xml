@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:paddingTop="40dp"
         android:textSize="30sp"
-        android:text="Item name and details"></TextView>
+        android:text="Item name and details"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,20 +28,21 @@
             android:id="@+id/spinnerPlanToSend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"></Spinner>
+            android:spinnerMode="dropdown"/>
 
+
+        <Button
+            android:id="@+id/plan_to_send_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:text="Send"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
-            android:text="Send"></Button>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:text="Discard"></Button>
+            android:text="Discard"/>
     </LinearLayout>
 
 </LinearLayout>

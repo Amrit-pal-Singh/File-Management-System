@@ -32,31 +32,34 @@ public class ReceiveItemActivity extends AppCompatActivity {
 
         ReceiveItemActivity.context = getApplicationContext();
 
-        String barcode_data = getIntent().getStringExtra("BarcodeData");
-        if(barcode_data != null) {
+        final String qr_data = getIntent().getStringExtra("BarcodeData");
+        if(qr_data != null) {
             TextView text = findViewById(R.id.textR);
-            text.setText(barcode_data);
+            text.setText(qr_data);
 
-            // Send data to api
             findViewById(R.id.receive_file_btn).setOnClickListener(v -> {
-                receiveFile(barcode_data);
+
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("qr", qr_data);
+                jsonObject.addProperty("role", "Instructor");
+                jsonObject.addProperty("department", "CSE");
+                jsonObject.addProperty("email", "amrit@gmail.com");
+
+                // Send data to api
+                receiveFile(jsonObject);
             });
         }
     }
 
-    private void receiveFile(String barcode_data){
+    private void receiveFile(JsonObject jsonObject){
 
-        barcode_data = "6549";
-
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("qr", barcode_data);
-        jsonObject.addProperty("role", "Instructor");
-        jsonObject.addProperty("department", "CSE");
-        jsonObject.addProperty("email", "amrit@gmail.com");
 
         Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
-        Call<JsonObject> call = PlaceHolderRestApi.restApi.receiveFile(LoginActivity.TOKEN, barcode_data, jsonObject);
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.receiveFile(
+                LoginActivity.TOKEN,
+                jsonObject.get("qr").getAsString(),
+                jsonObject);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
