@@ -32,7 +32,7 @@ public class ApproveDisapproveItemActivity extends AppCompatActivity {
 
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("qr", qr_data.trim());
-            jsonObject.addProperty("email", LoginCredentials.getEmail());
+            jsonObject.addProperty("email", "amrit@gmail.com");
             jsonObject.addProperty("role", "Director");
             jsonObject.addProperty("department", "");
 
