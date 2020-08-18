@@ -127,7 +127,9 @@ public class ActivityViewFile extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             String clickedItem=(String) list.getItemAtPosition(position);
-                            Toast.makeText(ActivityViewFile.this,clickedItem,Toast.LENGTH_LONG).show();
+                            String intentData = jsonFile.get("qr").toString();
+                            startActivity(new Intent(getApplicationContext(), activity_view_details_of_a_file.class).putExtra("QrValue", intentData));
+                            //Toast.makeText(ActivityViewFile.this,clickedItem,Toast.LENGTH_LONG).show();
                         }
                     });
 
