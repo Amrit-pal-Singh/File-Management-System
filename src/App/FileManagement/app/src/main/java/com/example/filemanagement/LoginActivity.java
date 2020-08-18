@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String TOKEN = null;
 
-    private int remove_it_later = 0;
+    private int remove_this_var_later = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +54,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void Login(View View) {
+
+        if (remove_this_var_later > 4){
+            startActivity(new Intent(getApplicationContext(), FrontPageActivity.class));
+        }
+
+        remove_this_var_later++;
+
         Toast.makeText(getApplicationContext(), "Trying to Login", Toast.LENGTH_LONG).show();
 
         EditText mEmail = findViewById(R.id.editTextEmail);
         EditText mPassword = findViewById(R.id.editTextPassword);
-        
+
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
 
