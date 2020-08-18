@@ -34,6 +34,7 @@ import java.io.IOException;
 public class ReceiveFragment extends Fragment {
 
     private ReceiveViewModel receiveViewModel;
+
     SurfaceView surfaceView;
     TextView txtBarcodeValue;
     private BarcodeDetector barcodeDetector;

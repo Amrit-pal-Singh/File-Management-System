@@ -30,7 +30,7 @@
       <option name="IGNORE_JAVADOC_PERIOD" value="true" />
       <option name="IGNORE_DUPLICATED_THROWS" value="false" />
       <option name="IGNORE_POINT_TO_ITSELF" value="false" />
-      <option name="myAdditionalJavadocTags" value="GET(&quot;api/v2.1/search&quot;),Query(&quot;entity_id&quot;)" />
+      <option name="myAdditionalJavadocTags" value="GET(&quot;api/v2.1/search&quot;),Query(&quot;entity_id&quot;),Query(&quot;entity_type&quot;),Header(&quot;user-key&quot;)" />
     </inspection_tool>
   </profile>
 </component>

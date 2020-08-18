@@ -3,6 +3,8 @@ package com.example.filemanagement;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -10,9 +12,17 @@ import retrofit2.http.POST;
 
 public interface PlaceHolderRestApi {
 
-    String BASE_URL = "http://7f7008b60cd3.ngrok.io/";
+    String BASE_URL = "http://192.168.1.31:8000";
 
     String token = "";
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+
+    PlaceHolderRestApi restApi = retrofit.create(PlaceHolderRestApi.class);
 
     /**
      * You can also pass header with dynamic value as below
@@ -21,8 +31,7 @@ public interface PlaceHolderRestApi {
      * Call<String> getRestaurantsBySearch(
      * @Query("entity_id") String entity_id,
      * @Query("entity_type") String entity_type,
-     * @Query("q") String query,
-     * @Header("user-key") String userkey);
+     * @Header("user-key") String userKey);
      *
      * */
 
@@ -37,5 +46,8 @@ public interface PlaceHolderRestApi {
 
     @GET("api/v1/db/generated_files/")
     Call<JsonObject> getFiles(@Header("Authorization") String userToken);
+
+    @GET("api/v1/db/receive_files/6549/")
+    Call<JsonObject> receiveFiles(@Header("Authorization") String userToken);
 
 }

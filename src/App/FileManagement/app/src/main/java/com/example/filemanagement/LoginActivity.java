@@ -20,7 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
     private static String LOG_TAG = "Login Activity";
 
-    private PlaceHolderRestApi placeHolderRestApi;
     public static String TOKEN = null;
 
     private int remove_it_later = 0;
@@ -59,14 +58,6 @@ public class LoginActivity extends AppCompatActivity {
 
         EditText mEmail = findViewById(R.id.editTextEmail);
         EditText mPassword = findViewById(R.id.editTextPassword);
-        //textViewResult = findViewById((R.id.text_view_result));
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PlaceHolderRestApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        placeHolderRestApi = retrofit.create(PlaceHolderRestApi.class);
 
         apiLogin(mEmail.getText().toString(), mPassword.getText().toString());
 
@@ -98,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
         LoginCredentials loginCredentials = new LoginCredentials(email, password);
 
-        Call<LoginCredentials> call = placeHolderRestApi.apiLogin(loginCredentials);
+        Call<LoginCredentials> call = PlaceHolderRestApi.restApi.apiLogin(loginCredentials);
 
         call.enqueue(new Callback<LoginCredentials>() {
             @Override
@@ -108,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     LoginCredentials loginCredentials = response.body();
 
+                    assert loginCredentials != null;
                     TOKEN = "Token " + loginCredentials.getToken();
 
                     String content = "Welcome ";
