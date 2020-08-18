@@ -49,8 +49,8 @@ public interface PlaceHolderRestApi {
     @GET("api/v1/db/generated_files/")
     Call<JsonObject> getFiles(@Header("Authorization") String userToken);
 
-    @PUT("api/v1/db/receive_files/{qr}/")
-    Call<JsonObject> receiveFiles(@Header("Authorization") String userToken,
+    @PUT("api/v1/db/receive_file/{qr}/")
+    Call<JsonObject> receiveFile(@Header("Authorization") String userToken,
                                   @Path("qr") String qr_code,
                                   @Body JsonObject jsonObject);
 //

@@ -2,6 +2,7 @@ package com.example.filemanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,7 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,10 +23,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReceiveItemActivity extends AppCompatActivity {
 
+    private static Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_item);
+
+        ReceiveItemActivity.context = getApplicationContext();
 
         String barcode_data = getIntent().getStringExtra("BarcodeData");
         if(barcode_data != null) {
@@ -44,11 +52,11 @@ public class ReceiveItemActivity extends AppCompatActivity {
         jsonObject.addProperty("qr", barcode_data);
         jsonObject.addProperty("role", "Instructor");
         jsonObject.addProperty("department", "CSE");
-        jsonObject.addProperty("sender_email", "amrit@gmail.com");
+        jsonObject.addProperty("email", "amrit@gmail.com");
 
         Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
-        Call<JsonObject> call = PlaceHolderRestApi.restApi.receiveFiles(LoginActivity.TOKEN, barcode_data, jsonObject);
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.receiveFile(LoginActivity.TOKEN, barcode_data, jsonObject);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -58,7 +66,12 @@ public class ReceiveItemActivity extends AppCompatActivity {
                     return;
                 }
                 JsonObject jsonObject = response.body();
-                Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, jsonObject.toString(), Toast.LENGTH_LONG).show();
+
+                for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){
+                    Toast.makeText(context, entry.getValue().toString(), Toast.LENGTH_LONG).show();
+                }
+
             }
 
             @Override

@@ -24,7 +24,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ActivityViewFile extends AppCompatActivity {
-    private PlaceHolderRestApi placeHolderRestApi;
     Button b1,b2,b3,b4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +67,6 @@ public class ActivityViewFile extends AppCompatActivity {
 
 
 
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PlaceHolderRestApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        placeHolderRestApi = retrofit.create(PlaceHolderRestApi.class);
-
         getFilesFun();
 
     }
@@ -89,7 +80,7 @@ public class ActivityViewFile extends AppCompatActivity {
 
         //Token for Jai: "Token a177092974d276852aa8c638cf6823e0f1a89972"
 
-        Call<JsonObject> call = placeHolderRestApi.getFiles(LoginActivity.TOKEN);
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.getFiles(LoginActivity.TOKEN);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
