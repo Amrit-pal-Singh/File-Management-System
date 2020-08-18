@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -81,6 +82,8 @@ public class HomeFragment extends Fragment {
                 if(selectedString != "Select Role"){
 //                    Toast.makeText(getContext(), "You Selected "+selectedString, Toast.LENGTH_SHORT).show();
                     Snackbar.make(root, "You Selected "+selectedString, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                    TextView currentRole = root.findViewById(R.id.hardCodedText_home);
+                    currentRole.setText("Current Role : "+selectedString);
                 }
             }
             @Override
