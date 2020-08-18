@@ -19,6 +19,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="8"></ListView>
+        <Spinner
+            android:id="@+id/spinnerPlanToSendBP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"></Spinner>
 
         <Button
             android:layout_width="wrap_content"
