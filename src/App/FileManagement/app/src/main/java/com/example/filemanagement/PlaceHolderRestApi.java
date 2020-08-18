@@ -50,4 +50,7 @@ public interface PlaceHolderRestApi {
     @GET("api/v1/db/receive_files/6549/")
     Call<JsonObject> receiveFiles(@Header("Authorization") String userToken);
 
+    @GET("api/v1/db/file_detail/<qr>/")
+    Call<JsonObject> getFileDetails(@Header("Authorization") String userToken);
+
 }
