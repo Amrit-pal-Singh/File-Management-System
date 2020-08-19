@@ -49,6 +49,7 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
         TextView text = findViewById(R.id.textP);
         final String qr_data = getIntent().getStringExtra("BarcodeData");
         if(qr_data != null) {
+
             text.setText(qr_data);
             findViewById(R.id.plan_to_send_btn).setOnClickListener(v -> {
 
@@ -70,6 +71,7 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
             });
         }
     }
+
 
     private void planToSend(JsonObject jsonObject){
 
@@ -105,7 +107,6 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
     }
 
     private void getAllRoles(){
-
 
         roleSpinner = findViewById(R.id.spinnerPlanToSend);
 

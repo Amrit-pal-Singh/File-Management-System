@@ -34,7 +34,7 @@ public class activity_view_files_app_disapp_by_others extends AppCompatActivity 
         final ListView list = findViewById(R.id.my_files_app_disapp_by_others_list);
 
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Demo File 1");
+//        arrayList.add("Demo File 1");
 
         Call<JsonObject> call = PlaceHolderRestApi.restApi.viewApproveDisapprovedFiles(LoginActivity.TOKEN);
 

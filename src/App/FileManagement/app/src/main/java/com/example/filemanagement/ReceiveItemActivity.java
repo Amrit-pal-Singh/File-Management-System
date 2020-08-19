@@ -54,7 +54,6 @@ public class ReceiveItemActivity extends AppCompatActivity {
 
     private void receiveFile(JsonObject jsonObject){
 
-
         Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
         Call<JsonObject> call = PlaceHolderRestApi.restApi.receiveFile(

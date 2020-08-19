@@ -68,7 +68,12 @@ public class activity_view_my_files_plan_to_send extends AppCompatActivity {
 //                        android.R.layout.simple_list_item_1, arrayList);
 
 //                list.setAdapter(arrayAdapter);
-                CustomListAdapter listAdapter = new CustomListAdapter(activity_view_my_files_plan_to_send.this , R.layout.custom_list_item , arrayList, dateList);
+                CustomListAdapter listAdapter = new CustomListAdapter(
+                        activity_view_my_files_plan_to_send.this ,
+                        R.layout.custom_list_item ,
+                        arrayList,
+                        dateList);
+
                 list.setAdapter(listAdapter);
 
                 list.setOnItemClickListener((parent, view, position, id) -> {

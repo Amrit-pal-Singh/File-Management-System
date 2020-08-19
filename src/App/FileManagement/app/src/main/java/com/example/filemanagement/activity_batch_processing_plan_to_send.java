@@ -2,6 +2,9 @@ package com.example.filemanagement;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -19,14 +22,35 @@ import retrofit2.Response;
 
 public class activity_batch_processing_plan_to_send extends Activity {
 
+    Spinner roleSpinner;
+    String selectedString;
+    ArrayList<String> rolesArray = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batch_processing_plan_to_send);
 
+
+        //callAPI - GetAllRoles
+        getAllRoles();
+        Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
+
+        roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedString = roleSpinner.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         final ArrayList<String> scannedData;
 
         if(getIntent().getSerializableExtra("BarcodeData") != null) {
+
             scannedData = (ArrayList<String>) getIntent().getSerializableExtra("BarcodeData");
 
             ListView listView = findViewById(R.id.listViewPlanToSendBPActivity);
@@ -36,28 +60,29 @@ public class activity_batch_processing_plan_to_send extends Activity {
             findViewById(R.id.batch_processing_plan_to_send_btn).setOnClickListener(v -> {
                 
                 for(String qr_data:scannedData){
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("qr", qr_data);
-                    jsonObject.addProperty("role", "Instructor");
-                    jsonObject.addProperty("department", "CSE");
-                    jsonObject.addProperty("email", "amrit@gmail.com");
 
-                    planToSend(jsonObject);
+                    if(!rolesArray.isEmpty() && !selectedString.isEmpty()){
 
+                        String[] str_arr = selectedString.split("\\|");
+
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("qr", qr_data.trim());
+                        jsonObject.addProperty("role", str_arr[0].trim());
+                        jsonObject.addProperty("department", str_arr[1].trim());
+                        jsonObject.addProperty("sender_email", LoginActivity.email_fixed);
+
+                        planToSend(jsonObject);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Please select role", Toast.LENGTH_SHORT).show();
+                    }
                 }
-
             });
-
         }
-
-        ArrayList<String> roles = new ArrayList<>();
-        Spinner spinner = findViewById(R.id.spinnerPlanToSendBP);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, roles);
-        spinner.setAdapter(spinnerAdapter);
     }
 
+
     private void planToSend(JsonObject jsonObject){
-//        barcode_data = "6549";
 
         Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
@@ -88,6 +113,52 @@ public class activity_batch_processing_plan_to_send extends Activity {
 
             }
         });
+    }
+
+
+    private void getAllRoles(){
+
+        roleSpinner = findViewById(R.id.spinnerPlanToSendBP);
+
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.getAllRoles(LoginActivity.TOKEN);
+
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Unsuccessful: " + response.code(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                JsonObject jsonObject = response.body();
+
+                for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+                    JsonObject roleObject = entry.getValue().getAsJsonObject();
+                    StringBuilder rolesBuilder = new StringBuilder();
+                    try {
+                        rolesBuilder.append(roleObject.get("name").getAsString()).append(" | ");
+                        rolesBuilder.append(roleObject.get("department").getAsString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    rolesArray.add(rolesBuilder.toString());
+                }
+
+                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getApplication(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        rolesArray);
+
+                roleSpinner.setAdapter(spinnerAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+
     }
 
 

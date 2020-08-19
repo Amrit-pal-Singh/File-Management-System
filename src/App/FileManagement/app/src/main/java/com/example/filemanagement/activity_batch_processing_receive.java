@@ -35,9 +35,9 @@ public class activity_batch_processing_receive extends Activity {
             findViewById(R.id.batch_processing_receive_all_btn).setOnClickListener(v -> {
                 for(String qr_data:scannedData){
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("qr", qr_data);
+                    jsonObject.addProperty("qr", qr_data.trim());
                     jsonObject.addProperty("role", LoginActivity.role_fixed);
-                    jsonObject.addProperty("department", "CSE");
+                    jsonObject.addProperty("department", LoginActivity.department_fixed);
                     jsonObject.addProperty("email", LoginActivity.email_fixed);
 
                     receiveFile(jsonObject);
