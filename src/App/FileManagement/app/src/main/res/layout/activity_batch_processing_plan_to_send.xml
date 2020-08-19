@@ -18,24 +18,25 @@
             android:id="@+id/listViewPlanToSendBPActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"></ListView>
+            android:layout_weight="8"/>
         <Spinner
             android:id="@+id/spinnerPlanToSendBP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"></Spinner>
+            android:spinnerMode="dropdown"/>
+
+        <Button
+            android:id="@+id/batch_processing_plan_to_send_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:text="send all"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
-            android:text="send all"></Button>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:text="discard all"></Button>
+            android:text="discard all"/>
 
     </LinearLayout>
 
