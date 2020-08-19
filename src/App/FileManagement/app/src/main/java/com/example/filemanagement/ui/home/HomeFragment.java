@@ -84,6 +84,7 @@ public class HomeFragment extends Fragment {
                     Snackbar.make(root, "You Selected "+selectedString, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                     TextView currentRole = root.findViewById(R.id.hardCodedText_home);
                     currentRole.setText("Current Role : "+selectedString);
+                    LoginActivity.role_fixed = selectedString;
                 }
             }
             @Override

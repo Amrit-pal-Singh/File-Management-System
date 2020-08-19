@@ -14,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
     private static String LOG_TAG = "Login Activity";
@@ -23,6 +21,13 @@ public class LoginActivity extends AppCompatActivity {
     public static String TOKEN = null;
 
     private int remove_this_var_later = 0;
+
+    public static String username_fixed;
+    public static String email_fixed;
+    public static String firstName_fixed;
+    public static String lastName_fixed;
+    public static String role_fixed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +38,18 @@ public class LoginActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_login);
         changeStatusBarColor();
-
         Toast.makeText(getApplicationContext(), "Login Activity", Toast.LENGTH_SHORT).show();
     }
 
     // Functions
+    private void init(String username, String email, String firstName, String lastName, String role) {
+        username_fixed = username;
+        email_fixed = email;
+        firstName_fixed = firstName;
+        lastName_fixed = lastName;
+        role_fixed = role;
+    }
+
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -95,6 +107,8 @@ public class LoginActivity extends AppCompatActivity {
 //                    content += "Email: " + loginCredentials.getEmail() + "\n";
                     content += loginCredentials.getFirst_name() + " "
                             + loginCredentials.getLast_name() + "\n";
+
+                    init(loginCredentials.getUsername(), loginCredentials.getEmail(), loginCredentials.getFirst_name(), loginCredentials.getLast_name(), "No Role");
 
                     Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
 
