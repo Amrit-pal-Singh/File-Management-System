@@ -25,7 +25,7 @@
 
         <ListView
             android:id = "@+id/my_files_plan_to_send_list"
-            android:layout_width = "wrap_content"
+            android:layout_width = "match_parent"
             android:layout_height = "wrap_content"
             android:layout_margin="16dp"/>
 

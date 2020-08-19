@@ -15,7 +15,7 @@
             android:id="@+id/textView"
             android:gravity="center"
             android:text="Demo"
-            android:textSize="20dp" android:paddingTop="10dip" android:paddingBottom="10dip"/>
+            android:textSize="20dp" android:paddingTop="10dip" android:paddingBottom="10dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

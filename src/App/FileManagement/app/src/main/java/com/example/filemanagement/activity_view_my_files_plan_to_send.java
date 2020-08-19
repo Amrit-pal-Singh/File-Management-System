@@ -2,7 +2,6 @@ package com.example.filemanagement;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,7 +34,7 @@ public class activity_view_my_files_plan_to_send extends AppCompatActivity {
 
         ArrayList<String> arrayList = new ArrayList<>();
         ArrayList<String> dateList = new ArrayList<>();
-        arrayList.add("Demo File 1");
+//        arrayList.add("Demo File 1");
 
         Call<JsonObject> call = PlaceHolderRestApi.restApi.viewPlanToSendFiles(LoginActivity.TOKEN);
 
@@ -57,16 +56,16 @@ public class activity_view_my_files_plan_to_send extends AppCompatActivity {
                         file.append(jsonFile.get("qr").getAsString()).append(" | ");
                         file.append(jsonFile.get("name").getAsString());
                         last_plan_to_send = jsonFile.get("last_plan_to_send_time").getAsString();
-                        dateList.add(last_plan_to_send);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
+                    dateList.add(last_plan_to_send);
                     arrayList.add(file.toString());
                 }
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, arrayList);
+//                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
+//                        android.R.layout.simple_list_item_1, arrayList);
 
 //                list.setAdapter(arrayAdapter);
                 CustomListAdapter listAdapter = new CustomListAdapter(activity_view_my_files_plan_to_send.this , R.layout.custom_list_item , arrayList, dateList);
