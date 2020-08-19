@@ -153,7 +153,6 @@ class File(models.Model):
 
     def save(self, *args, **kwargs):
         print(self.path)
-        self.path += '+'
         return super().save(*args, **kwargs)
 
     def __str__(self):

@@ -41,14 +41,23 @@ class ReceiveFileSerializer(ModelSerializer):
         fields = ('qr', 'email', 'role', 'department',)
 
     def update(self, instance, validated_data):
-        path = instance.path
-        path += '#'
-        path += validated_data.get('email')
+        original_path = instance.path
+        user = get_object_or_404(User, email = validated_data.get('email'))
+        first_name = user.first_name
+        last_name = user.last_name
+
+
+        path = '#'
+        path += first_name + " " + last_name
         path += ','
         path += validated_data.get('role')
         path += ','
         path += validated_data.get('department')
-        instance.path = path
+        
+        prev_path = '#'+instance.path.split('#')[-1]
+        if(path != prev_path):
+            instance.path = original_path + path
+        
         instance.plan_to_send = None
         instance.plan_to_send_generator = None
 
@@ -72,19 +81,29 @@ class ApproveDisapproveSerializer(ModelSerializer):
     def update(self, instance, validated_data):
         approved = validated_data.get('approve')
         original_path = instance.path
+        user = get_object_or_404(User, email = validated_data.get('email'))
+        first_name = user.first_name
+        last_name = user.last_name
+
+
         path = '#'
-        path += validated_data.get('email')
+        path += first_name + " " + last_name
         path += ','
         path += validated_data.get('role')
         path += ','
         path += validated_data.get('department') 
-        instance.path = original_path + path
         instance.restarted = False
+        prev_path = '#'+instance.path.split('#')[-1]
+        if(path != prev_path):
+            instance.path = original_path + path
         instance.plan_to_send = None
         instance.plan_to_send_generator = None
-        if(approved):
+        prev_approve = '#'+instance.approved.split('#')[-1]
+        prev_disapprove = '#'+instance.disapproved.split('#')[-1]
+        print(prev_approve, path, "#WRWQRIUQWGIUUAAJSSKJ", prev_path == path)
+        if(approved and (path != prev_approve)):
             instance.approved += path
-        else:
+        elif(prev_disapprove != path):
             instance.disapproved += path
         instance.save()
         return instance
