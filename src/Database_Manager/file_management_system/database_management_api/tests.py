@@ -19,7 +19,7 @@ print("""
 """)
 
 # base_url = 'http://612f39a4af3b.ngrok.io/'
-base_url = "http://127.0.0.1:8000/"
+base_url = "http://55e5b6239f22.ngrok.io/"
 
 
 url_login = base_url+'api/v1/db/login/'
@@ -141,22 +141,22 @@ pprint(r.json())
 
 
 
-print("""
+# print("""
 
-    ** ApproveFile
+#     ** ApproveFile
 
-""")
-roles_url = base_url + 'api/v1/db/approve_disapprove_file/6549/'
-data = {
-    "email": "amrit@gmail.com",
-    "role": "Director",
-    "department": "",
-    "approve": 1,
-    "qr": "6549"
-}
-r = requests.put(roles_url, json=data, headers=headers)
-print(r.status_code)
-pprint(r.json())
+# """)
+# roles_url = base_url + 'api/v1/db/approve_disapprove_file/6549/'
+# data = {
+#     "email": "amrit@gmail.com",
+#     "role": "Director",
+#     "department": "",
+#     "approve": 1,
+#     "qr": "6549"
+# }
+# r = requests.put(roles_url, json=data, headers=headers)
+# print(r.status_code)
+# pprint(r.json())
 
 
 

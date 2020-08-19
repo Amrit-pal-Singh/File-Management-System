@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 
 public interface PlaceHolderRestApi {
 
-    String BASE_URL = "http://192.168.1.31:8000/";
+    String BASE_URL = "http://55e5b6239f22.ngrok.io";
 
     String token = "";
 
