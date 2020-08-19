@@ -24,6 +24,7 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
 
     Spinner roleSpinner;
     String selectedString;
+    ArrayList<String> rolesArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +32,8 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
         setContentView(R.layout.activity_plan_to_send_item);
 
         //callAPI - GetAllRoles
+        getAllRoles();
 
-        ArrayList<String> roles = new ArrayList<>();
-        roleSpinner = findViewById(R.id.spinnerPlanToSend);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                roles);
-        roleSpinner.setAdapter(spinnerAdapter);
 
         roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -55,20 +51,27 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
         if(qr_data != null) {
             text.setText(qr_data);
             findViewById(R.id.plan_to_send_btn).setOnClickListener(v -> {
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("qr", "6549");
-                jsonObject.addProperty("role", selectedString);
-                jsonObject.addProperty("department", "CSE");
-                jsonObject.addProperty("sender_email", "amrit@gmail.com");
 
-                planToSend(jsonObject);
+                if(!rolesArray.isEmpty() && !selectedString.isEmpty()){
+
+                    String[] str_arr = selectedString.split("\\|");
+
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("qr", qr_data.trim());
+                    jsonObject.addProperty("role", str_arr[0].trim());
+                    jsonObject.addProperty("department", str_arr[1].trim());
+                    jsonObject.addProperty("sender_email", LoginActivity.email_fixed);
+
+                    planToSend(jsonObject);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Please select role", Toast.LENGTH_SHORT).show();
+                }
             });
-
         }
     }
 
     private void planToSend(JsonObject jsonObject){
-//        barcode_data = "6549";
 
         Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
@@ -101,5 +104,50 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
         });
     }
 
+    private void getAllRoles(){
+
+
+        roleSpinner = findViewById(R.id.spinnerPlanToSend);
+
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.getAllRoles(LoginActivity.TOKEN);
+
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Unsuccessful: " + response.code(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                JsonObject jsonObject = response.body();
+
+                for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+                    JsonObject roleObject = entry.getValue().getAsJsonObject();
+                    StringBuilder rolesBuilder = new StringBuilder();
+                    try {
+                        rolesBuilder.append(roleObject.get("name").getAsString()).append(" | ");
+                        rolesBuilder.append(roleObject.get("department").getAsString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    rolesArray.add(rolesBuilder.toString());
+                }
+
+                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getApplication(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        rolesArray);
+
+                roleSpinner.setAdapter(spinnerAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+
+    }
 
 }

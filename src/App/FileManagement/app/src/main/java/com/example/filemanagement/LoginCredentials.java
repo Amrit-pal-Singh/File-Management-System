@@ -14,7 +14,7 @@ public class LoginCredentials {
     private String token;
 
     @SerializedName("email")
-    private static String email;
+    private String email;
 
     @SerializedName("admin_permissions")
     private Boolean admin_permissions = false;
@@ -37,7 +37,7 @@ public class LoginCredentials {
         return token;
     }
 
-    public static String getEmail() {
+    public String getEmail() {
         return email;
     }
 

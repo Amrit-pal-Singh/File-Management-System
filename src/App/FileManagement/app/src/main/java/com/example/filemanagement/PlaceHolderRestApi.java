@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 
 public interface PlaceHolderRestApi {
 
-    String BASE_URL = "http://55e5b6239f22.ngrok.io";
+    String BASE_URL = "http://192.168.1.31:8000";
 
     String token = "";
 
@@ -37,12 +37,19 @@ public interface PlaceHolderRestApi {
      *
      * */
 
+    /** Login */
     @POST("api/v1/db/login/")
     Call<LoginCredentials> apiLogin(@Body LoginCredentials loginCredentials);
 
+    /** List My Roles */
     @GET("api/v1/db/roles/")
     Call<JsonObject> getRoles(@Header("Authorization") String userToken);
 
+    /** List All Roles Present */
+    @GET("api/v1/db/get_all_roles")
+    Call<JsonObject> getAllRoles(@Header("Authorization") String userToken);
+
+    /** Add Files */
     @POST("api/v1/db/add_file/")
     Call<JsonObject> addFile(@Header("Authorization") String userToken, @Body JsonObject jsonObject);
 
