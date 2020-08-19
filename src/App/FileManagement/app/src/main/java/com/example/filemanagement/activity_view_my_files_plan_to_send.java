@@ -34,6 +34,7 @@ public class activity_view_my_files_plan_to_send extends AppCompatActivity {
         final ListView list = findViewById(R.id.my_files_plan_to_send_list);
 
         ArrayList<String> arrayList = new ArrayList<>();
+        ArrayList<String> dateList = new ArrayList<>();
         arrayList.add("Demo File 1");
 
         Call<JsonObject> call = PlaceHolderRestApi.restApi.viewPlanToSendFiles(LoginActivity.TOKEN);
@@ -48,13 +49,15 @@ public class activity_view_my_files_plan_to_send extends AppCompatActivity {
                 }
 
                 JsonObject jsonObject = response.body();
-
+                String last_plan_to_send = "";
                 for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
                     JsonObject jsonFile = entry.getValue().getAsJsonObject();
                     StringBuilder file = new StringBuilder();
                     try {
                         file.append(jsonFile.get("qr").getAsString()).append(" | ");
                         file.append(jsonFile.get("name").getAsString());
+                        last_plan_to_send = jsonFile.get("last_plan_to_send_time").getAsString();
+                        dateList.add(last_plan_to_send);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -65,7 +68,9 @@ public class activity_view_my_files_plan_to_send extends AppCompatActivity {
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
                         android.R.layout.simple_list_item_1, arrayList);
 
-                list.setAdapter(arrayAdapter);
+//                list.setAdapter(arrayAdapter);
+                CustomListAdapter listAdapter = new CustomListAdapter(activity_view_my_files_plan_to_send.this , R.layout.custom_list_item , arrayList, dateList);
+                list.setAdapter(listAdapter);
 
                 list.setOnItemClickListener((parent, view, position, id) -> {
                     String clickedItem = (String) list.getItemAtPosition(position);

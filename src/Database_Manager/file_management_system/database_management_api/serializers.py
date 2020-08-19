@@ -9,6 +9,7 @@ from database_management.models import(
     Role,
     AppUser,
 )
+import datetime
 from django.shortcuts import get_object_or_404
 
 class AddUserSerializer(ModelSerializer):
@@ -41,14 +42,23 @@ class ReceiveFileSerializer(ModelSerializer):
         fields = ('qr', 'email', 'role', 'department',)
 
     def update(self, instance, validated_data):
-        path = instance.path
-        path += '#'
-        path += validated_data.get('email')
+        original_path = instance.path
+        user = get_object_or_404(User, email = validated_data.get('email'))
+        first_name = user.first_name
+        last_name = user.last_name
+
+
+        path = '#'
+        path += first_name + " " + last_name
         path += ','
         path += validated_data.get('role')
         path += ','
         path += validated_data.get('department')
-        instance.path = path
+        
+        prev_path = '#'+instance.path.split('#')[-1]
+        if(path != prev_path):
+            instance.path = original_path + path
+        instance.plan_to_send_time = None
         instance.plan_to_send = None
         instance.plan_to_send_generator = None
 
@@ -72,19 +82,31 @@ class ApproveDisapproveSerializer(ModelSerializer):
     def update(self, instance, validated_data):
         approved = validated_data.get('approve')
         original_path = instance.path
+        user = get_object_or_404(User, email = validated_data.get('email'))
+        first_name = user.first_name
+        last_name = user.last_name
+
+
         path = '#'
-        path += validated_data.get('email')
+        path += first_name + " " + last_name
         path += ','
         path += validated_data.get('role')
         path += ','
         path += validated_data.get('department') 
-        instance.path = original_path + path
         instance.restarted = False
+        prev_path = '#'+instance.path.split('#')[-1]
+        if(path != prev_path):
+            instance.path = original_path + path
+        
+        instance.plan_to_send_time = None
         instance.plan_to_send = None
         instance.plan_to_send_generator = None
-        if(approved):
+        
+        prev_approve = '#'+instance.approved.split('#')[-1]
+        prev_disapprove = '#'+instance.disapproved.split('#')[-1]
+        if(approved and (path != prev_approve)):
             instance.approved += path
-        else:
+        elif(prev_disapprove != path):
             instance.disapproved += path
         instance.save()
         return instance
@@ -101,6 +123,7 @@ class PlanToSendSerializer(ModelSerializer):
     def update(self, instance, validated_data):
         role = get_object_or_404(Role, name=validated_data.get('role'), department=validated_data.get('department'))
         app_user = get_object_or_404(User, email=validated_data.get('sender_email'))
+        instance.plan_to_send_time = str(datetime.date.today())
         instance.plan_to_send_generator = app_user
         instance.plan_to_send = role
         instance.save()

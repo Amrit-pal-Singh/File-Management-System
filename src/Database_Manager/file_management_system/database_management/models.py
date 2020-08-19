@@ -146,6 +146,7 @@ class File(models.Model):
     time_generated = models.DateTimeField(auto_now_add=True)
     restarted = models.BooleanField()
     path = models.CharField(max_length=1000, null=True)
+    plan_to_send_time = models.CharField(max_length=100, blank=True, null=True)
     plan_to_send = models.ForeignKey(Role, on_delete=models.CASCADE,null=True)
     plan_to_send_generator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='plan_to_send_generator')
     approved = models.CharField(max_length=1000, default='')
@@ -153,7 +154,6 @@ class File(models.Model):
 
     def save(self, *args, **kwargs):
         print(self.path)
-        self.path += '+'
         return super().save(*args, **kwargs)
 
     def __str__(self):
