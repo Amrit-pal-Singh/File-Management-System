@@ -18,19 +18,20 @@
             android:id="@+id/listViewReceiveBPActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="8"></ListView>
+            android:layout_weight="8"/>
+
+        <Button
+            android:id="@+id/batch_processing_receive_all_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:text="Receive all"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
-            android:text="Receive all"></Button>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:text="discard all"></Button>
+            android:text="discard all"/>
 
     </LinearLayout>
 
