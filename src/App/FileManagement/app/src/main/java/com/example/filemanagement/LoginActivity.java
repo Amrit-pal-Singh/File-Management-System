@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String username_fixed;
     public static String email_fixed;
+    public static String department_fixed;
     public static String firstName_fixed;
     public static String lastName_fixed;
     public static String role_fixed;

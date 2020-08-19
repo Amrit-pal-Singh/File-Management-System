@@ -84,7 +84,9 @@ public class HomeFragment extends Fragment {
                     Snackbar.make(root, "You Selected "+selectedString, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                     TextView currentRole = root.findViewById(R.id.hardCodedText_home);
                     currentRole.setText("Current Role : "+selectedString);
-                    LoginActivity.role_fixed = selectedString;
+                    String arr[] = selectedString.split("\\|");
+                    LoginActivity.role_fixed = arr[0].trim();
+                    LoginActivity.department_fixed = arr[1].trim();
                 }
             }
             @Override
@@ -133,13 +135,13 @@ public class HomeFragment extends Fragment {
                     JsonObject jsonRoles = entry.getValue().getAsJsonObject();
                     StringBuilder role = new StringBuilder();
                     try {
-                        role.append(jsonRoles.get("name").toString()).append(" | ");
-                        role.append(jsonRoles.get("department").toString());
+                        role.append(jsonRoles.get("name").getAsString()).append(" | ");
+                        role.append(jsonRoles.get("department").getAsString());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-                    categories.add(role.toString().replaceAll("\"", ""));
+                    categories.add(role.toString());
                 }
             }
 

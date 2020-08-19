@@ -33,7 +33,7 @@ public class activity_view_generated_files_by_me extends AppCompatActivity {
         final ListView list = findViewById(R.id.generated_files_by_me_list);
 
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Demo File 1");
+//        arrayList.add("Demo File 1");
 
         Call<JsonObject> call = PlaceHolderRestApi.restApi.getFiles(LoginActivity.TOKEN);
 

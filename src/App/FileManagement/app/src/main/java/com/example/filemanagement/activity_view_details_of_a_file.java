@@ -1,26 +1,16 @@
 package com.example.filemanagement;
 
+import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 public class activity_view_details_of_a_file extends AppCompatActivity {
     private PlaceHolderRestApi placeHolderRestApi;
@@ -60,7 +50,8 @@ public class activity_view_details_of_a_file extends AppCompatActivity {
                 tvUser.setText(jsonObject.get("user").getAsString());
 
                 TextView tvTime = findViewById(R.id.time_generated);
-                tvTime.setText(jsonObject.get("time_generated").getAsString());
+                String arr[] = jsonObject.get("time_generated").getAsString().split("\\.");
+                tvTime.setText(arr[0]);
 
                 TextView tvRestarted = findViewById(R.id.restarted);
                 tvRestarted.setText(jsonObject.get("restarted").getAsString());
