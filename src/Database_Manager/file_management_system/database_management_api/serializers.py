@@ -9,7 +9,7 @@ from database_management.models import(
     Role,
     AppUser,
 )
-from datetime import datetime
+import datetime
 from django.shortcuts import get_object_or_404
 
 class AddUserSerializer(ModelSerializer):
@@ -123,7 +123,7 @@ class PlanToSendSerializer(ModelSerializer):
     def update(self, instance, validated_data):
         role = get_object_or_404(Role, name=validated_data.get('role'), department=validated_data.get('department'))
         app_user = get_object_or_404(User, email=validated_data.get('sender_email'))
-        instance.plan_to_send_time = datetime.now()
+        instance.plan_to_send_time = str(datetime.date.today())
         instance.plan_to_send_generator = app_user
         instance.plan_to_send = role
         instance.save()
