@@ -11,9 +11,11 @@
         tools:ignore="MissingConstraints">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/textView"
-            android:textSize="20px" android:paddingTop="10dip" android:paddingBottom="10dip"/>
+            android:gravity="center"
+            android:text="Demo"
+            android:textSize="20dp" android:paddingTop="10dip" android:paddingBottom="10dip"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
