@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,9 +33,9 @@ public class ApproveDisapproveItemActivity extends AppCompatActivity {
 
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("qr", qr_data.trim());
-            jsonObject.addProperty("email", "amrit@gmail.com");
-            jsonObject.addProperty("role", "Director");
-            jsonObject.addProperty("department", "");
+            jsonObject.addProperty("email", LoginActivity.email_fixed);
+            jsonObject.addProperty("role", LoginActivity.role_fixed);
+            jsonObject.addProperty("department", LoginActivity.department_fixed);
 
 
             findViewById(R.id.approve_btn).setOnClickListener(v -> {

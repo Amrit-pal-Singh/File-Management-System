@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,10 +41,10 @@ public class ReceiveItemActivity extends AppCompatActivity {
             findViewById(R.id.receive_file_btn).setOnClickListener(v -> {
 
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("qr", qr_data);
-                jsonObject.addProperty("role", "Instructor");
-                jsonObject.addProperty("department", "CSE");
-                jsonObject.addProperty("email", "amrit@gmail.com");
+                jsonObject.addProperty("qr", qr_data.trim());
+                jsonObject.addProperty("role", LoginActivity.role_fixed);
+                jsonObject.addProperty("department", LoginActivity.department_fixed);
+                jsonObject.addProperty("email", LoginActivity.email_fixed);
 
                 // Send data to api
                 receiveFile(jsonObject);

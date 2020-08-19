@@ -36,9 +36,9 @@ public class activity_batch_processing_receive extends Activity {
                 for(String qr_data:scannedData){
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("qr", qr_data);
-                    jsonObject.addProperty("role", "Instructor");
+                    jsonObject.addProperty("role", LoginActivity.role_fixed);
                     jsonObject.addProperty("department", "CSE");
-                    jsonObject.addProperty("email", "amrit@gmail.com");
+                    jsonObject.addProperty("email", LoginActivity.email_fixed);
 
                     receiveFile(jsonObject);
 

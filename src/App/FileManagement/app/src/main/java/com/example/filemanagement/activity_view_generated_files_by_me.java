@@ -66,7 +66,8 @@ public class activity_view_generated_files_by_me extends AppCompatActivity {
                     arrayList.add(file.toString());
                 }
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(activity_view_generated_files_by_me.this,
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+                        activity_view_generated_files_by_me.this,
                         android.R.layout.simple_list_item_1, arrayList);
 
                 list.setAdapter(arrayAdapter);

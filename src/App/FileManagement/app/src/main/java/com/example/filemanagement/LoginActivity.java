@@ -109,7 +109,11 @@ public class LoginActivity extends AppCompatActivity {
                     content += loginCredentials.getFirst_name() + " "
                             + loginCredentials.getLast_name() + "\n";
 
-                    init(loginCredentials.getUsername(), loginCredentials.getEmail(), loginCredentials.getFirst_name(), loginCredentials.getLast_name(), "No Role");
+                    init(loginCredentials.getUsername(),
+                            loginCredentials.getEmail(),
+                            loginCredentials.getFirst_name(),
+                            loginCredentials.getLast_name(),
+                            "No Role");
 
                     Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
 

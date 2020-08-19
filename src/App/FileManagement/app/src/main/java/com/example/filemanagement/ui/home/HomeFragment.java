@@ -79,14 +79,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedString = roleSelectorSpinner.getItemAtPosition(position).toString();
-                if(selectedString != "Select Role"){
+                if(selectedString != "No Role"){
 //                    Toast.makeText(getContext(), "You Selected "+selectedString, Toast.LENGTH_SHORT).show();
                     Snackbar.make(root, "You Selected "+selectedString, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                     TextView currentRole = root.findViewById(R.id.hardCodedText_home);
                     currentRole.setText("Current Role : "+selectedString);
                     String arr[] = selectedString.split("\\|");
-                    LoginActivity.role_fixed = arr[0].trim();
-                    LoginActivity.department_fixed = arr[1].trim();
+                    if (arr.length > 1) {
+                        LoginActivity.role_fixed = arr[0].trim();
+                        LoginActivity.department_fixed = arr[1].trim();
+                    }
                 }
             }
             @Override

@@ -26,7 +26,7 @@ public class LoginCredentials {
     private String last_name;
 
     @SerializedName("roles")
-    private Object object;
+    private Object roles_object;
 
     public LoginCredentials (String username, String password) {
         this.username = username;
@@ -57,7 +57,7 @@ public class LoginCredentials {
         return last_name;
     }
 
-    public Object getObject() {
-        return object;
+    public Object getRoles_object() {
+        return roles_object;
     }
 }

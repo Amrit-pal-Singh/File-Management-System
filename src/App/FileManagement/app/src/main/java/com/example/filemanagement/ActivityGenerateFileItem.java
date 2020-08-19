@@ -16,7 +16,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ActivityGenerateFileItem extends AppCompatActivity {
-    private PlaceHolderRestApi placeHolderRestApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +31,7 @@ public class ActivityGenerateFileItem extends AppCompatActivity {
 
             // Send data to api
             findViewById(R.id.add_file_btn).setOnClickListener(v -> {
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(PlaceHolderRestApi.BASE_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                placeHolderRestApi = retrofit.create(PlaceHolderRestApi.class);
-
-                addFile(editText.getText().toString(), barcode_data);
+                addFile(editText.getText().toString(), barcode_data.trim());
             });
         }
     }
@@ -57,7 +49,7 @@ public class ActivityGenerateFileItem extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
-        Call<JsonObject> call = placeHolderRestApi.addFile(LoginActivity.TOKEN, jsonObject);
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.addFile(LoginActivity.TOKEN, jsonObject);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
