@@ -1,7 +1,8 @@
 package com.example.filemanagement;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,20 +22,42 @@ import retrofit2.Response;
 
 public class ActivityPlanToSendItem extends AppCompatActivity {
 
+    Spinner roleSpinner;
+    String selectedString;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_to_send_item);
 
+        //callAPI - GetAllRoles
+
+        ArrayList<String> roles = new ArrayList<>();
+        roleSpinner = findViewById(R.id.spinnerPlanToSend);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                roles);
+        roleSpinner.setAdapter(spinnerAdapter);
+
+        roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedString = roleSpinner.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         TextView text = findViewById(R.id.textP);
         final String qr_data = getIntent().getStringExtra("BarcodeData");
         if(qr_data != null) {
             text.setText(qr_data);
-
             findViewById(R.id.plan_to_send_btn).setOnClickListener(v -> {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("qr", "6549");
-                jsonObject.addProperty("role", "Instructor");
+                jsonObject.addProperty("role", selectedString);
                 jsonObject.addProperty("department", "CSE");
                 jsonObject.addProperty("sender_email", "amrit@gmail.com");
 
@@ -42,13 +65,6 @@ public class ActivityPlanToSendItem extends AppCompatActivity {
             });
 
         }
-
-        ArrayList<String> roles = new ArrayList<>();
-        Spinner spinner = findViewById(R.id.spinnerPlanToSend);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                roles);
-        spinner.setAdapter(spinnerAdapter);
     }
 
     private void planToSend(JsonObject jsonObject){
