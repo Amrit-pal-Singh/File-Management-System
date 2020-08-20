@@ -257,7 +257,7 @@ class ViewMyPlanToSendFiles(APIView):
                                 'plan_to_send_generator': str(file.plan_to_send_generator),
                                 'approved':file.approved,
                                 'disapproved': file.disapproved}    
-            sindex += 1
+            index += 1
         dict_files_dump = json.dumps(dict_files)
         json_files = json.loads(dict_files_dump)
         return Response(json_files, status=status.HTTP_200_OK)

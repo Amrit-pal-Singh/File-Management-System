@@ -14,7 +14,11 @@ import retrofit2.http.Path;
 
 public interface PlaceHolderRestApi {
 
+<<<<<<< Updated upstream
     String BASE_URL = "http://a94221471115.ngrok.io/";
+=======
+    String BASE_URL = "http://887caab22c8a.ngrok.io";
+>>>>>>> Stashed changes
 
     String token = "";
 

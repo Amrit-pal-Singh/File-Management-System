@@ -53,7 +53,8 @@ class ReceiveFileSerializer(ModelSerializer):
         path += ','
         path += validated_data.get('role')
         path += ','
-        path += validated_data.get('department')
+        if(validated_data.get('department') is not None):
+            path += validated_data.get('department')
         
         prev_path = '#'+instance.path.split('#')[-1]
         if(path != prev_path):
@@ -92,7 +93,8 @@ class ApproveDisapproveSerializer(ModelSerializer):
         path += ','
         path += validated_data.get('role')
         path += ','
-        path += validated_data.get('department') 
+        if(validated_data.get('department') is not None):
+            path += validated_data.get('department')
         instance.restarted = False
         prev_path = '#'+instance.path.split('#')[-1]
         if(path != prev_path):
