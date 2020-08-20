@@ -19,11 +19,11 @@ public class ActivityViewFile extends AppCompatActivity {
             startActivity(intent);
         });
 
-        b2 = findViewById(R.id.app_disapp_files_by_me);
-        b2.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), activity_view_app_disapp_files_by_me.class);
-            startActivity(intent);
-        });
+//        b2 = findViewById(R.id.app_disapp_files_by_me);
+//        b2.setOnClickListener(v -> {
+//            Intent intent = new Intent(getApplicationContext(), activity_view_app_disapp_files_by_me.class);
+//            startActivity(intent);
+//        });
 
         b3 = findViewById(R.id.my_plan_to_send_files);
         b3.setOnClickListener(v -> {
