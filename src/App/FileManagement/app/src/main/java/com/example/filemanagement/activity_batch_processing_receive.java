@@ -18,21 +18,28 @@ import retrofit2.Response;
 
 public class activity_batch_processing_receive extends Activity {
 
+    ArrayList<String> scannedData;
+    ArrayList<String> Failures;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batch_processing_receive);
 
-        final ArrayList<String> scannedData;
+
         if(getIntent().getSerializableExtra("BarcodeData") != null) {
             scannedData = (ArrayList<String>) getIntent().getSerializableExtra("BarcodeData");
 
+            for(String str : scannedData) {
+                Failures.add(str.trim()+" | Not Sent");
+            }
+
             ListView listView = findViewById(R.id.listViewReceiveBPActivity);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, scannedData);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Failures);
             listView.setAdapter(adapter);
 
-
             findViewById(R.id.batch_processing_receive_all_btn).setOnClickListener(v -> {
+
                 for(String qr_data:scannedData){
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("qr", qr_data.trim());
@@ -41,7 +48,6 @@ public class activity_batch_processing_receive extends Activity {
                     jsonObject.addProperty("email", LoginActivity.email_fixed);
 
                     receiveFile(jsonObject);
-
                 }
 
             });
@@ -64,9 +70,18 @@ public class activity_batch_processing_receive extends Activity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "Unsuccessful: " + response.code(), Toast.LENGTH_LONG).show();
+
                     return;
                 }
                 JsonObject jsonObject = response.body();
+                String qr = jsonObject.get("qr").getAsString().trim();
+                String qr1 = qr+" | Not Sent";
+                for(int i=0; i<Failures.size(); i++) {
+                    if(Failures.get(i).equals(qr1)) {
+                        Failures.set(i, qr+" | Successfully Sent");
+                        break;
+                    }
+                }
                 Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
                 for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){
