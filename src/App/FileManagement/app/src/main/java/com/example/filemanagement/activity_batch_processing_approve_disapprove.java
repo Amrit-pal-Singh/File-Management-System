@@ -33,7 +33,7 @@ public class activity_batch_processing_approve_disapprove extends Activity {
             }
 
             ListView listView = findViewById(R.id.listViewPlanToSendBPActivity);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Failures);
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Failures);
             listView.setAdapter(adapter);
 
             findViewById(R.id.batch_processing_approve_btn).setOnClickListener(v -> {

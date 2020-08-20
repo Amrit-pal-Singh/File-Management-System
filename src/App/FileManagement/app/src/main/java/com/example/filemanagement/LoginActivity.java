@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Default login credentials for testing
         if(email.equals("")){
-            email = "jai69@gmail.com";
+            email = "amrit@gmail.com";
             password = "new_pass_123";
         }
 
