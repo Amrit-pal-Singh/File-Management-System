@@ -16,6 +16,9 @@ import retrofit2.Response;
 
 public class activity_batch_processing_approve_disapprove extends Activity {
 
+    ArrayList<String> Failures = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +28,12 @@ public class activity_batch_processing_approve_disapprove extends Activity {
         if(getIntent().getSerializableExtra("BarcodeData") != null) {
             scannedData = (ArrayList<String>) getIntent().getSerializableExtra("BarcodeData");
 
+            for(String str : scannedData) {
+                Failures.add(str.trim()+" | Not Sent");
+            }
+
             ListView listView = findViewById(R.id.listViewPlanToSendBPActivity);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, scannedData);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Failures);
             listView.setAdapter(adapter);
 
             findViewById(R.id.batch_processing_approve_btn).setOnClickListener(v -> {
@@ -82,6 +89,16 @@ public class activity_batch_processing_approve_disapprove extends Activity {
                     return;
                 }
                 JsonObject jsonObject = response.body();
+                String qr = jsonObject.get("qr").getAsString().trim();
+                String qr1 = qr+" | Not Sent";
+                for(int i=0; i<Failures.size(); i++) {
+                    if(Failures.get(i).equals(qr1)) {
+                        Failures.set(i, qr+" | Successfully Sent");
+                        adapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
+
                 Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
 //                for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){

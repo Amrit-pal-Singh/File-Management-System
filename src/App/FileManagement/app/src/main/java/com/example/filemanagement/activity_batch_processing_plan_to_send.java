@@ -2,7 +2,6 @@ package com.example.filemanagement;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +24,9 @@ public class activity_batch_processing_plan_to_send extends Activity {
     Spinner roleSpinner;
     String selectedString;
     ArrayList<String> rolesArray = new ArrayList<>();
+
+    ArrayList<String> Failures = new ArrayList<>();
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,12 @@ public class activity_batch_processing_plan_to_send extends Activity {
 
             scannedData = (ArrayList<String>) getIntent().getSerializableExtra("BarcodeData");
 
+            for(String str : scannedData) {
+                Failures.add(str.trim() + " | Not Sent");
+            }
+
             ListView listView = findViewById(R.id.listViewPlanToSendBPActivity);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, scannedData);
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Failures);
             listView.setAdapter(adapter);
 
             findViewById(R.id.batch_processing_plan_to_send_btn).setOnClickListener(v -> {
@@ -99,6 +105,16 @@ public class activity_batch_processing_plan_to_send extends Activity {
                     return;
                 }
                 JsonObject jsonObject = response.body();
+                String qr = jsonObject.get("qr").getAsString().trim();
+                String qr1 = qr+" | Not Sent";
+                for(int i=0; i<Failures.size(); i++) {
+                    if(Failures.get(i).equals(qr1)) {
+                        Failures.set(i, qr+" | Successfully Sent");
+                        adapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
+
                 Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_LONG).show();
 
                 for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()){
