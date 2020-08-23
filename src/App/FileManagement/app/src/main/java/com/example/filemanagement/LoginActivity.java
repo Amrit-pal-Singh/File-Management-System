@@ -1,6 +1,7 @@
 package com.example.filemanagement;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String TOKEN = null;
 
-    private int remove_this_var_later = 0;
+    /* Vars for persistent storage */
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String MY_TOKEN = "token";
+    public static final String USERNAME = "username";
+    public static final String EMAIL = "email";
+    public static final String FIRST_NAME = "first_name";
+    public static final String LAST_NAME = "last_name";
 
     public static String username_fixed;
     public static String email_fixed;
@@ -40,6 +47,30 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         changeStatusBarColor();
         Toast.makeText(getApplicationContext(), "Login Activity", Toast.LENGTH_SHORT).show();
+
+        /* If user credentials are already stored then directly login the user */
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
+        TOKEN = sharedPreferences.getString(MY_TOKEN, null);
+
+        if (TOKEN != null){
+            init(
+                    sharedPreferences.getString(USERNAME, null),
+                    sharedPreferences.getString(EMAIL, null),
+                    sharedPreferences.getString(FIRST_NAME, null),
+                    sharedPreferences.getString(LAST_NAME, null),
+                    "No Role"
+            );
+
+            Toast.makeText(getApplicationContext(),
+                    "Welcome " + firstName_fixed + " " + lastName_fixed,
+                    Toast.LENGTH_LONG).show();
+
+            startActivity(new Intent(getApplicationContext(), FrontPageActivity.class));
+            finish();
+        }
+
     }
 
     // Functions
@@ -68,12 +99,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void Login(View View) {
 
-        if (remove_this_var_later > 4){
-            startActivity(new Intent(getApplicationContext(), FrontPageActivity.class));
-        }
-
-        remove_this_var_later++;
-
         EditText mEmail = findViewById(R.id.editTextEmail);
         EditText mPassword = findViewById(R.id.editTextPassword);
 
@@ -81,10 +106,10 @@ public class LoginActivity extends AppCompatActivity {
         String password = mPassword.getText().toString();
 
         //Default login credentials for testing
-        if(email.equals("")){
-            email = "amrit@gmail.com";
-            password = "new_pass_123";
-        }
+//        if(email.equals("")){
+//            email = "amrit@gmail.com";
+//            password = "new_pass_123";
+//        }
 
         Toast.makeText(getApplicationContext(), "Trying to Login", Toast.LENGTH_LONG).show();
 
@@ -105,7 +130,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     String content = "Welcome ";
 //                    content += "Code: " + response.code() + "\n";
-//                    content += "Email: " + loginCredentials.getEmail() + "\n";
                     content += loginCredentials.getFirst_name() + " "
                             + loginCredentials.getLast_name() + "\n";
 
@@ -117,7 +141,20 @@ public class LoginActivity extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), content, Toast.LENGTH_LONG).show();
 
+                    /* Save Token in persistent storage */
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putString(MY_TOKEN, TOKEN);
+                    editor.putString(USERNAME, username_fixed);
+                    editor.putString(EMAIL, email_fixed);
+                    editor.putString(FIRST_NAME, firstName_fixed);
+                    editor.putString(LAST_NAME, lastName_fixed);
+
+                    editor.apply();
+
                     startActivity(new Intent(getApplicationContext(), FrontPageActivity.class));
+                    finish();
 
                 }
                 else{

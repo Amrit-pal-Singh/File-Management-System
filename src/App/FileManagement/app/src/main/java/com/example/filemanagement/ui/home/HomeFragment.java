@@ -109,19 +109,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void getRoles(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PlaceHolderRestApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        PlaceHolderRestApi placeHolderRestApi = retrofit.create(PlaceHolderRestApi.class);
-
-        //Token for Jai: "Token a177092974d276852aa8c638cf6823e0f1a89972"
         if(LoginActivity.TOKEN == null){
             categories.add("NULL TOKEN");
         }
 
-        Call<JsonObject> call = placeHolderRestApi.getRoles(LoginActivity.TOKEN);
+        Call<JsonObject> call = PlaceHolderRestApi.restApi.getRoles(LoginActivity.TOKEN);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
