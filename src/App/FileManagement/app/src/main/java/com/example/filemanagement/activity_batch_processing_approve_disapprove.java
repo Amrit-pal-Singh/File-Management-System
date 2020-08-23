@@ -32,7 +32,7 @@ public class activity_batch_processing_approve_disapprove extends Activity {
                 Failures.add(str.trim()+" | Not Sent");
             }
 
-            ListView listView = findViewById(R.id.listViewPlanToSendBPActivity);
+            ListView listView = findViewById(R.id.listViewApproveDisapproveBPActivity);
             adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Failures);
             listView.setAdapter(adapter);
 

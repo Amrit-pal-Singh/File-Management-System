@@ -15,7 +15,7 @@
         android:gravity="center|bottom"
         android:orientation="vertical" >
         <ListView
-            android:id="@+id/listViewPlanToSendBPActivity"
+            android:id="@+id/listViewApproveDisapproveBPActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="8"/>
