@@ -149,14 +149,5 @@ tools:context=".LoginActivity">
     android:layout_width="11dp"
     android:layout_height="match_parent"
     android:background="@drawable/ic_side_bg"/>
-<ImageView
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_add_img"
-    android:layout_marginRight="11dp"
-    android:layout_marginBottom="30dp"
-    android:onClick="onLoginClick"/>
 
 </RelativeLayout>
