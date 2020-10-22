@@ -10,9 +10,9 @@ Abhishek Yadav,
 Jai Garg
 
 
-<img src="images/Screen Shot 2020-10-22 at 9.54.07 PM.png" width="200">  <img src="images/Screen Shot 2020-10-22 at 9.51.48 PM.png" width="200"> 
-<img src="images/Screen Shot 2020-10-22 at 9.51.43 PM.png" width="200">
-<img src="images/Screen Shot 2020-10-22 at 9.52.23 PM.png" width="200">  <img src="images/Screen Shot 2020-10-22 at 9.53.35 PM.png" width="200"> 
-<img src="images/Screen Shot 2020-10-22 at 9.53.54 PM.png" width="200"> 
+<img src="images/Screen Shot 2020-10-22 at 9.54.07 PM.png" width="250">  <img src="images/Screen Shot 2020-10-22 at 9.51.48 PM.png" width="250"> 
+<img src="images/Screen Shot 2020-10-22 at 9.51.43 PM.png" width="250">
+<img src="images/Screen Shot 2020-10-22 at 9.52.23 PM.png" width="250">  <img src="images/Screen Shot 2020-10-22 at 9.53.35 PM.png" width="250"> 
+<img src="images/Screen Shot 2020-10-22 at 9.53.54 PM.png" width="250"> 
 
 
