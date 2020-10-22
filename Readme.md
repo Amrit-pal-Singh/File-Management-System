@@ -8,3 +8,6 @@ Ripudaman Singh,
 Amritpal Singh,
 Abhishek Yadav,
 Jai Garg
+
+
+<img src="images/i1.png" width="600">
