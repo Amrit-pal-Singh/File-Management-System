@@ -10,4 +10,4 @@ Abhishek Yadav,
 Jai Garg
 
 
-<img src="images/Screen Shot 2020-10-22 at 9.51.48 PM.png" width="300">
+<img src="images/Screen Shot 2020-10-22 at 9.51.48 PM.png" width="200">
