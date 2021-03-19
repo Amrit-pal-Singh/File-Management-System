@@ -7,7 +7,7 @@ django-excel-base==1.0.4
 django-excel-response2==3.0.2
 django-restframework==0.0.1
 django-six==1.0.4
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 idna==2.10
 pytz==2020.1
 requests==2.24.0
